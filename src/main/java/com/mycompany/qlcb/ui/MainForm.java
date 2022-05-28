@@ -32,7 +32,7 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1 = new javax.swing.JToolBar();
         jButton1 = new javax.swing.JButton();
         jSeparator9 = new javax.swing.JToolBar.Separator();
-        jButton2 = new javax.swing.JButton();
+        tbrQLCN = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         jButton3 = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
@@ -51,7 +51,7 @@ public class MainForm extends javax.swing.JFrame {
         jMenuItem10 = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
+        mnuAboutUs = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -74,13 +74,20 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
         jToolBar1.add(jSeparator9);
 
-        jButton2.setText("QL Công nhân");
-        jButton2.setFocusable(false);
-        jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton2);
+        tbrQLCN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer32px.png"))); // NOI18N
+        tbrQLCN.setText("QL Công nhân");
+        tbrQLCN.setFocusable(false);
+        tbrQLCN.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbrQLCN.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbrQLCN.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbrQLCNActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(tbrQLCN);
         jToolBar1.add(jSeparator5);
 
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/worker32px.png"))); // NOI18N
         jButton3.setText("QL Kỹ Sư");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -88,6 +95,7 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.add(jButton3);
         jToolBar1.add(jSeparator4);
 
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-32.png"))); // NOI18N
         jButton4.setText("QL Nhân Viên");
         jButton4.setFocusable(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -157,20 +165,25 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
-        jMenu4.setText("Trợ giúp");
+        mnuAboutUs.setText("Trợ giúp");
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Help-icon-16.png"))); // NOI18N
         jMenuItem5.setText("Giới thiệu");
-        jMenu4.add(jMenuItem5);
-        jMenu4.add(jSeparator8);
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        mnuAboutUs.add(jMenuItem5);
+        mnuAboutUs.add(jSeparator8);
 
         jMenuItem6.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-help-about-icon-16.png"))); // NOI18N
         jMenuItem6.setText("Nội dung");
-        jMenu4.add(jMenuItem6);
+        mnuAboutUs.add(jMenuItem6);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(mnuAboutUs);
 
         setJMenuBar(jMenuBar1);
 
@@ -178,11 +191,13 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 711, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(tplMainBoard)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,6 +238,20 @@ public class MainForm extends javax.swing.JFrame {
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_tbrAboutUsActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        AboutUsDialog aboutDialog = new AboutUsDialog(this, true);
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void tbrQLCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLCNActionPerformed
+        if (mWorkerPanel == null) {
+            mWorkerPanel = new WorkerManagementPanel();
+        
+            tplMainBoard.addTab("Quản lý sinh viên", mWorkerPanel);
+        }
+        tplMainBoard.setSelectedComponent(mWorkerPanel);
+    }//GEN-LAST:event_tbrQLCNActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -260,13 +289,11 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem10;
@@ -286,8 +313,10 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator9;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem menuFile_Exit;
+    private javax.swing.JMenu mnuAboutUs;
     private javax.swing.JMenuItem mnuManageWorker;
     private javax.swing.JButton tbrAboutUs;
+    private javax.swing.JButton tbrQLCN;
     private javax.swing.JTabbedPane tplMainBoard;
     // End of variables declaration//GEN-END:variables
 }
