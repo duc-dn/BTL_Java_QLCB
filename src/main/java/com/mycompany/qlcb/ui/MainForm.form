@@ -69,6 +69,12 @@
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="mnuManageWorker">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+N"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/mycompany/qlcb/icons/worker16px.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; c&#xf4;ng nh&#xe2;n"/>
               </Properties>
               <Events>
@@ -79,6 +85,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem10">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+K"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/mycompany/qlcb/icons/Engineer16px.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; k&#x1ef9; s&#x1b0;"/>
               </Properties>
             </MenuItem>
@@ -86,6 +98,12 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jMenuItem4">
               <Properties>
+                <Property name="accelerator" type="javax.swing.KeyStroke" editor="org.netbeans.modules.form.editors.KeyStrokeEditor">
+                  <KeyStroke key="Ctrl+V"/>
+                </Property>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-16.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; nh&#xe2;n vi&#xea;n"/>
               </Properties>
               <Events>
@@ -200,7 +218,7 @@
         <Component class="javax.swing.JButton" name="tbrQLCN">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/mycompany/qlcb/icons/Engineer32px.png"/>
+              <Image iconType="3" name="/com/mycompany/qlcb/icons/worker32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="QL C&#xf4;ng nh&#xe2;n"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -216,7 +234,7 @@
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/com/mycompany/qlcb/icons/worker32px.png"/>
+              <Image iconType="3" name="/com/mycompany/qlcb/icons/Engineer32px.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="QL K&#x1ef9; S&#x1b0;"/>
             <Property name="focusable" type="boolean" value="false"/>

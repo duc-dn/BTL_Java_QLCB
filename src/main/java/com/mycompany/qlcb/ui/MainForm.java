@@ -13,6 +13,7 @@ public class MainForm extends javax.swing.JFrame {
     private WorkerManagementPanel mWorkerPanel;
     public MainForm() {
         initComponents();
+        setTitle("Nhóm 11 - Quản lý cán bộ");
         setLocationRelativeTo(null);
     }
 
@@ -74,7 +75,7 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.add(jButton1);
         jToolBar1.add(jSeparator9);
 
-        tbrQLCN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer32px.png"))); // NOI18N
+        tbrQLCN.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/worker32px.png"))); // NOI18N
         tbrQLCN.setText("QL Công nhân");
         tbrQLCN.setFocusable(false);
         tbrQLCN.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -87,7 +88,7 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.add(tbrQLCN);
         jToolBar1.add(jSeparator5);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/worker32px.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer32px.png"))); // NOI18N
         jButton3.setText("QL Kỹ Sư");
         jButton3.setFocusable(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -142,6 +143,8 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenu2.setText("Quản lý");
 
+        mnuManageWorker.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_N, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnuManageWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/worker16px.png"))); // NOI18N
         mnuManageWorker.setText("Quản lý công nhân");
         mnuManageWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,10 +154,14 @@ public class MainForm extends javax.swing.JFrame {
         jMenu2.add(mnuManageWorker);
         jMenu2.add(jSeparator6);
 
+        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer16px.png"))); // NOI18N
         jMenuItem10.setText("Quản lý kỹ sư");
         jMenu2.add(jMenuItem10);
         jMenu2.add(jSeparator7);
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-16.png"))); // NOI18N
         jMenuItem4.setText("Quản lý nhân viên");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,7 +235,7 @@ public class MainForm extends javax.swing.JFrame {
         if (mWorkerPanel == null) {
             mWorkerPanel = new WorkerManagementPanel();
         
-            tplMainBoard.addTab("Quản lý sinh viên", mWorkerPanel);
+            tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
     }//GEN-LAST:event_mnuManageWorkerActionPerformed
@@ -247,7 +254,7 @@ public class MainForm extends javax.swing.JFrame {
         if (mWorkerPanel == null) {
             mWorkerPanel = new WorkerManagementPanel();
         
-            tplMainBoard.addTab("Quản lý sinh viên", mWorkerPanel);
+            tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
     }//GEN-LAST:event_tbrQLCNActionPerformed
