@@ -11,6 +11,8 @@ import javax.swing.ImageIcon;
 public class MainForm extends javax.swing.JFrame {
 
     private WorkerManagementPanel mWorkerPanel;
+    private EngineerManagementPanel mEngineerPanel;
+    private EmployeeManagementPanel mEmployeePanel;
     public MainForm() {
         initComponents();
         setTitle("Nhóm 11 - Quản lý cán bộ");
@@ -35,9 +37,9 @@ public class MainForm extends javax.swing.JFrame {
         jSeparator9 = new javax.swing.JToolBar.Separator();
         tbrQLCN = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
-        jButton3 = new javax.swing.JButton();
+        tbrQLKS = new javax.swing.JButton();
         jSeparator4 = new javax.swing.JToolBar.Separator();
-        jButton4 = new javax.swing.JButton();
+        tbrQLNV = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         tbrAboutUs = new javax.swing.JButton();
         tplMainBoard = new javax.swing.JTabbedPane();
@@ -49,9 +51,9 @@ public class MainForm extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         mnuManageWorker = new javax.swing.JMenuItem();
         jSeparator6 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem10 = new javax.swing.JMenuItem();
+        mnuManageEngineer = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem4 = new javax.swing.JMenuItem();
+        mnuManageEmployee = new javax.swing.JMenuItem();
         mnuAboutUs = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
@@ -88,20 +90,30 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.add(tbrQLCN);
         jToolBar1.add(jSeparator5);
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer32px.png"))); // NOI18N
-        jButton3.setText("QL Kỹ Sư");
-        jButton3.setFocusable(false);
-        jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton3);
+        tbrQLKS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer32px.png"))); // NOI18N
+        tbrQLKS.setText("QL Kỹ Sư");
+        tbrQLKS.setFocusable(false);
+        tbrQLKS.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbrQLKS.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbrQLKS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbrQLKSActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(tbrQLKS);
         jToolBar1.add(jSeparator4);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-32.png"))); // NOI18N
-        jButton4.setText("QL Nhân Viên");
-        jButton4.setFocusable(false);
-        jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar1.add(jButton4);
+        tbrQLNV.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-32.png"))); // NOI18N
+        tbrQLNV.setText("QL Nhân Viên");
+        tbrQLNV.setFocusable(false);
+        tbrQLNV.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbrQLNV.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbrQLNV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbrQLNVActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(tbrQLNV);
         jToolBar1.add(jSeparator2);
 
         tbrAboutUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-help-about-icon-32.png"))); // NOI18N
@@ -154,21 +166,26 @@ public class MainForm extends javax.swing.JFrame {
         jMenu2.add(mnuManageWorker);
         jMenu2.add(jSeparator6);
 
-        jMenuItem10.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer16px.png"))); // NOI18N
-        jMenuItem10.setText("Quản lý kỹ sư");
-        jMenu2.add(jMenuItem10);
-        jMenu2.add(jSeparator7);
-
-        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-16.png"))); // NOI18N
-        jMenuItem4.setText("Quản lý nhân viên");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        mnuManageEngineer.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_K, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnuManageEngineer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Engineer16px.png"))); // NOI18N
+        mnuManageEngineer.setText("Quản lý kỹ sư");
+        mnuManageEngineer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                mnuManageEngineerActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem4);
+        jMenu2.add(mnuManageEngineer);
+        jMenu2.add(jSeparator7);
+
+        mnuManageEmployee.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnuManageEmployee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/10207-man-student-light-skin-tone-icon-16.png"))); // NOI18N
+        mnuManageEmployee.setText("Quản lý nhân viên");
+        mnuManageEmployee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuManageEmployeeActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnuManageEmployee);
 
         jMenuBar1.add(jMenu2);
 
@@ -200,11 +217,9 @@ public class MainForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(tplMainBoard)
+                .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -218,9 +233,13 @@ public class MainForm extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+    private void mnuManageEmployeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManageEmployeeActionPerformed
+        if (mEmployeePanel == null) {
+            mEmployeePanel = new EmployeeManagementPanel();
+            tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
+        }
+        tplMainBoard.setSelectedComponent(mEmployeePanel);
+    }//GEN-LAST:event_mnuManageEmployeeActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         // TODO add your handling code here:
@@ -259,6 +278,33 @@ public class MainForm extends javax.swing.JFrame {
         tplMainBoard.setSelectedComponent(mWorkerPanel);
     }//GEN-LAST:event_tbrQLCNActionPerformed
 
+    private void mnuManageEngineerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManageEngineerActionPerformed
+        // TODO add your handling code here:
+        if (mEngineerPanel == null) {
+            mEngineerPanel = new EngineerManagementPanel();
+            
+            tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
+        }
+        tplMainBoard.setSelectedComponent(mEngineerPanel);
+    }//GEN-LAST:event_mnuManageEngineerActionPerformed
+
+    private void tbrQLKSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLKSActionPerformed
+        if (mEngineerPanel == null) {
+            mEngineerPanel = new EngineerManagementPanel();
+            
+            tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
+        }
+        tplMainBoard.setSelectedComponent(mEngineerPanel);
+    }//GEN-LAST:event_tbrQLKSActionPerformed
+
+    private void tbrQLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLNVActionPerformed
+        if (mEmployeePanel == null) {
+            mEmployeePanel = new EmployeeManagementPanel();
+            tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
+        }
+        tplMainBoard.setSelectedComponent(mEmployeePanel);
+    }//GEN-LAST:event_tbrQLNVActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,15 +342,11 @@ public class MainForm extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
@@ -321,9 +363,13 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JMenuItem menuFile_Exit;
     private javax.swing.JMenu mnuAboutUs;
+    private javax.swing.JMenuItem mnuManageEmployee;
+    private javax.swing.JMenuItem mnuManageEngineer;
     private javax.swing.JMenuItem mnuManageWorker;
     private javax.swing.JButton tbrAboutUs;
     private javax.swing.JButton tbrQLCN;
+    private javax.swing.JButton tbrQLKS;
+    private javax.swing.JButton tbrQLNV;
     private javax.swing.JTabbedPane tplMainBoard;
     // End of variables declaration//GEN-END:variables
 }
