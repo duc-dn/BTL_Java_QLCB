@@ -325,8 +325,8 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_tbrLogoutActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        LoginDialog dialog = new LoginDialog(this, true);
-        dialog.setVisible(true);
+//        LoginDialog dialog = new LoginDialog(this, true);
+//        dialog.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
 
     /**

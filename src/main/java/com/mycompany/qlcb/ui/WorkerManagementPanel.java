@@ -4,17 +4,19 @@
  */
 package com.mycompany.qlcb.ui;
 
-/**
- *
- * @author Duc
- */
+import com.mycompany.qlcb.dao.CanBoDao;
+import com.mycompany.qlcb.helpers.DataValidator;
+import com.mycompany.qlcb.helpers.MessageDialogHelper;
+import com.mycompany.qlcb.model.Congnhan;
+
+
 public class WorkerManagementPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form WorkerManagementPanel
-     */
+    private MainForm parentForm;
     public WorkerManagementPanel() {
         initComponents();
+        rdNam.setSelected(true);
+        rdNu.setSelected(false);
     }
 
     /**
@@ -48,24 +50,34 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblWorker = new javax.swing.JTable();
         jSeparator3 = new javax.swing.JSeparator();
+        txtMaNghe = new javax.swing.JTextField();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("QUẢN LÝ CÔNG NHÂN");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 18, -1, -1));
+        add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 51, 636, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Họ tên");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 79, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Năm sinh");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 118, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Giới tính");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 157, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Địa chỉ");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 209, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Bậc");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 258, -1, -1));
 
         txtName.setPreferredSize(new java.awt.Dimension(9, 22));
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +85,8 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                 txtNameActionPerformed(evt);
             }
         });
+        add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 69, 510, 30));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 291, 636, 7));
 
         txtNamSinh.setPreferredSize(new java.awt.Dimension(9, 22));
         txtNamSinh.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +94,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                 txtNamSinhActionPerformed(evt);
             }
         });
+        add(txtNamSinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 108, 510, 30));
 
         txtBac.setPreferredSize(new java.awt.Dimension(9, 22));
         txtBac.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +102,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                 txtBacActionPerformed(evt);
             }
         });
+        add(txtBac, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 248, 510, 30));
 
         txtAddress.setPreferredSize(new java.awt.Dimension(9, 22));
         txtAddress.addActionListener(new java.awt.event.ActionListener() {
@@ -94,24 +110,41 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                 txtAddressActionPerformed(evt);
             }
         });
+        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 199, 510, 30));
 
         genderGroup.add(rdNam);
         rdNam.setText("Nam");
+        add(rdNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(138, 156, -1, -1));
 
         genderGroup.add(rdNu);
         rdNu.setText("Nữ");
+        add(rdNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 156, -1, -1));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/new-icon-16.png"))); // NOI18N
         btnAdd.setText("Tạo mới");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(136, 305, -1, -1));
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Save-icon.png"))); // NOI18N
         btnSave.setText("Lưu");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(283, 305, -1, -1));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-document-edit-icon-16.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(422, 305, -1, -1));
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-edit-delete-icon-16.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 305, -1, -1));
 
         tblWorker.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -134,93 +167,11 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblWorker);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jSeparator1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5))
-                        .addGap(66, 66, 66)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtNamSinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtAddress, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtBac, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(rdNam)
-                                .addGap(79, 79, 79)
-                                .addComponent(rdNu)
-                                .addGap(0, 339, Short.MAX_VALUE))
-                            .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jSeparator2)
-                    .addComponent(jSeparator3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(124, 124, 124)
-                        .addComponent(btnAdd)
-                        .addGap(50, 50, 50)
-                        .addComponent(btnSave)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUpdate)
-                        .addGap(54, 54, 54)
-                        .addComponent(btnDelete)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtNamSinh, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(19, 19, 19)
-                        .addComponent(jLabel3)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdNam)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(rdNu)
-                        .addComponent(jLabel4)))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtBac, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(13, 13, 13)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnSave)
-                    .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
-        );
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 356, 636, 150));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 343, 636, 6));
+
+        txtMaNghe.setText("1");
+        add(txtMaNghe, new org.netbeans.lib.awtextra.AbsoluteConstraints(209, 465, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -238,6 +189,54 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtAddressActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        txtName.setText("");
+        txtAddress.setText("");
+        txtNamSinh.setText("");
+        rdNam.setSelected(true);
+        rdNu.setSelected(false);
+        txtBac.setText("");
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtName, sb, "Tên nhân viên không được để trống!!");
+        DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
+        DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
+        DataValidator.validateEmpty(txtBac, sb, "Bậc không được bỏ trống!!");
+        
+        // Nếu có lỗi
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
+            return;
+        }
+        
+        
+        try {
+            // Lấy dữ liệu từ trên form xuống
+            Congnhan cn = new Congnhan();
+            cn.setTencb(txtName.getText());
+            cn.setNamsinh(txtNamSinh.getText());
+            cn.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            cn.setBac(Integer.parseInt(txtBac.getText()));
+            cn.setDiachi(txtAddress.getText());
+            int manghe = Integer.parseInt(txtMaNghe.getText());
+            CanBoDao dao = new CanBoDao();
+            if (dao.insertCB(cn, manghe))
+            {
+                MessageDialogHelper.showMessageDialog(parentForm, "Nhân viên đã được thêm thành công!!",
+                "Thông báo");
+            }
+            else {
+                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Nhân viên không được lưu do lỗi", "Cảnh báo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -261,6 +260,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblWorker;
     private javax.swing.JTextField txtAddress;
     private javax.swing.JTextField txtBac;
+    private javax.swing.JTextField txtMaNghe;
     private javax.swing.JTextField txtNamSinh;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

@@ -132,11 +132,15 @@ public class LoginDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasswordActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_txtPasswordActionPerformed
 
+    
+    // Xử lý nút close của form login
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
-        System.exit(0);
+        if (nd == null) {
+            MessageDialogHelper.showErrorDialog(this, "Bạn chưa đăng nhập!!", "Thông báo");
+        }
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -170,9 +174,7 @@ public class LoginDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        if (nd == null) {
-            MessageDialogHelper.showErrorDialog(this, "Bạn cần đăng nhập!!", "Lỗi");
-        }
+        System.exit(0); 
     }//GEN-LAST:event_formWindowClosing
 
 
