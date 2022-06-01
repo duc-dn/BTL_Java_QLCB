@@ -16,7 +16,7 @@ public class AboutUsDialog extends javax.swing.JDialog {
     public AboutUsDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(parent);
         setTitle("Nhóm 11 - Giới thiệu");
     }
 
