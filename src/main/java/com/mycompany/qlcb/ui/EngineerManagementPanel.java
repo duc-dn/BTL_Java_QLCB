@@ -265,7 +265,6 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         StringBuilder sb = new StringBuilder();
         DataValidator.validateEmpty(txtname, sb, "Tên nhân viên không được để trống!!");
-        DataValidator.validateEmpty(txtmaks, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtField, sb, "Tên ngành đào tạo không được bỏ trống!!");
         DataValidator.validateEmpty(txtDegree, sb, "Bằng không được bỏ trống!!");
@@ -306,6 +305,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 
                 // Chèn vào bảng nhân viên
                 dao.insertTable("tbl_kysu", macb, txtField.getText(), txtDegree.getText());
+                loadDataToTable();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -380,6 +380,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             {
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được cập nhật thành công!!",
                 "Thông báo");
+                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
@@ -420,6 +421,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             {
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được xóa thành công!!",
                 "Thông báo");
+                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 

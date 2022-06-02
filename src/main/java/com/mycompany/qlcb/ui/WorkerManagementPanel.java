@@ -269,6 +269,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             {
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được thêm thành công!!",
                 "Thông báo");
+                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
@@ -346,6 +347,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             {
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được cập nhật thành công!!",
                 "Thông báo");
+                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
@@ -385,6 +387,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             {
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được xóa thành công!!",
                 "Thông báo");
+                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
