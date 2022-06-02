@@ -1,22 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.qlcb.dao;
 
 import com.mycompany.qlcb.helpers.DatabaseHelper;
 import com.mycompany.qlcb.model.Congnhan;
-import com.mycompany.qlcb.model.Kysu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-/**
- *
- * @author Duc
- */
+
 public class CongNhanDao {
     public ArrayList<Congnhan> getAllCongNhan() throws SQLException, Exception {
         String sql = "select * from tbl_canbo cb inner join tbl_congnhan cn on cb.macb = cn.macn";
@@ -31,6 +23,7 @@ public class CongNhanDao {
                 ArrayList<Congnhan> listcn = new ArrayList<Congnhan>();
                 while (rs.next()) {
                     Congnhan cn = new Congnhan();
+                    cn.setMacb(rs.getInt("macb"));
                     cn.setTencb(rs.getString("tencb"));
                     cn.setNamsinh(rs.getInt("namsinh"));
                     cn.setGioitinh(rs.getString("gioitinh"));
@@ -40,6 +33,24 @@ public class CongNhanDao {
                 }
                 return listcn;
             }
+        }
+    }
+    
+    public boolean update(Congnhan cn) throws SQLException, Exception {
+        
+        String sql = "update tbl_canbo, tbl_congnhan set tencb = ?, namsinh = ?, gioitinh = ?, diachi = ?, bac = ? where tbl_canbo.macb = tbl_congnhan.macn and tbl_canbo.macb = ?";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setString(1, cn.getTencb());
+            pstmt.setInt(2, cn.getNamsinh());
+            pstmt.setString(3, cn.getGioitinh());
+            pstmt.setString(4, cn.getDiachi());
+            pstmt.setInt(5, cn.getBac());
+            pstmt.setInt(6, cn.getMacb());
+            return pstmt.executeUpdate() > 0;
         }
     }
 }

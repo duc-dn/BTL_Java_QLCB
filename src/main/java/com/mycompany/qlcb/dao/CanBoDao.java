@@ -82,7 +82,7 @@ public class CanBoDao {
     public void update(String table, Canbo cb, String filed1, String filed2) throws SQLException, Exception {
         if (table.equalsIgnoreCase("tbl_kysu")) {
             String sql = "update tbl_canbo, " + table + " set tencb = ?, "
-                    + "namsinh = ?, gioitinh = ?, diachi = ?, congviec = ?"
+                    + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, loaibang = ?"
                     + "where tbl_canbo.macb = tbl_nhanvien.manv"
                     + "and macb = ?";
 
@@ -96,9 +96,51 @@ public class CanBoDao {
                     pstmt.setString(4, cb.getDiachi());
                     pstmt.setString(5, filed1);
                     pstmt.setString(6, filed2);
+                    pstmt.setInt(7, cb.getMacb());
+                }
+        }
+        else {
+            String sql;
+            if (table.equalsIgnoreCase("tbl_nhanvien")) {
+                sql = "update tbl_canbo, " + table + " set tencb = ?, "
+                    + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, congviec = ?"
+                    + "where tbl_canbo.macb = tbl_nhanvien.manv"
+                    + "and macb = ?";
+            }
+            else {
+                sql = "update tbl_canbo, " + table + " set tencb = ?, "
+                    + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, bac = ?"
+                    + "where tbl_canbo.macb = tbl_nhanvien.manv"
+                    + "and macb = ?";
+            }
+            
+
+            try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) 
+                {
+                    pstmt.setString(1, cb.getTencb());
+                    pstmt.setInt(2, cb.getNamsinh());
+                    pstmt.setString(3, cb.getGioitinh());
+                    pstmt.setString(4, cb.getDiachi());
+                    pstmt.setString(5, filed1);
+                    pstmt.setInt(6, cb.getMacb());
                 }
         }
 
     }
-
+    
+     public boolean delete(String table, String ma, int macb) throws SQLException, Exception {
+        
+        String sql = "DELETE tbl_canbo.*, " + table + ".* from tbl_canbo inner join " 
+                + table + " on tbl_canbo.macb = " + table+"."+ ma + " where tbl_canbo.macb = ?;";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setInt(1, macb);
+            return pstmt.executeUpdate() > 0;
+        }
+    }
 }

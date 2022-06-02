@@ -28,6 +28,14 @@ public class Nhanvien extends Canbo{
         return tencb;
     }
 
+    public int getMacb() {
+        return macb;
+    }
+
+    public void setMacb(int macb) {
+        this.macb = macb;
+    }
+
     public void setTencb(String tencb) {
         this.tencb = tencb;
     }

@@ -8,7 +8,7 @@ import com.mycompany.qlcb.model.Nhanvien;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
+
 
 public class EmployeeManagementPanel extends javax.swing.JPanel {
     
@@ -26,7 +26,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
 
     private void initTable() {
        tblModel = new DefaultTableModel();
-       tblModel.setColumnIdentifiers(new String[] {"Họ tên","Năm sinh", "Giới tính", "Địa chỉ", "Công việc"});
+       tblModel.setColumnIdentifiers(new String[] {"Mã NV","Họ tên","Năm sinh", "Giới tính", 
+           "Địa chỉ", "Công việc"});
        tblEmployee.setModel(tblModel);
     }
     
@@ -37,7 +38,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             tblModel.setRowCount(0);
             for (Nhanvien it:list) {
                 tblModel.addRow(new Object[] {
-                    it.getTencb(), it.getNamsinh(), it.getGioitinh(), it.getDiachi(), it.getCongviec()
+                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+                    it.getDiachi(), it.getCongviec()
                 });
             }
             tblModel.fireTableDataChanged();
@@ -75,6 +77,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         txtJob = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtMaNghe = new javax.swing.JTextField();
+        txtmanv = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -161,6 +164,11 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-edit-delete-icon-16.png"))); // NOI18N
         btnDelete.setText("Xóa");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
         add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 294, -1, -1));
 
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
@@ -182,6 +190,11 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEmployeeMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEmployee);
 
         add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 350, 636, 163));
@@ -201,6 +214,9 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
 
         txtMaNghe.setText("3");
         add(txtMaNghe, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 480, -1, -1));
+
+        txtmanv.setText("jTextField1");
+        add(txtmanv, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 460, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
@@ -230,7 +246,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtName, sb, "Tên nhân viên không được để trống!!");
+        DataValidator.validateEmpty(txtName, sb, "Tên Công nhân không được để trống!!");
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
@@ -256,21 +272,21 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             
             if (dao.insertCB(nv, manghe))
             {
-                MessageDialogHelper.showMessageDialog(parentForm, "Nhân viên đã được thêm thành công!!",
+                MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được thêm thành công!!",
                 "Thông báo");
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
-                        "Nhân viên không được lưu do lỗi", "Cảnh báo");
+                        "Công nhân không được lưu do lỗi", "Cảnh báo");
             }
             
             
-            // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng nhân viên
+            // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng Công nhân
             
             if (dao.getLastIdCB() != -1) {
                 int macb = dao.getLastIdCB();
                 
-                // Chèn vào bảng nhân viên
+                // Chèn vào bảng Công nhân
                 dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
             }
             
@@ -283,7 +299,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtName, sb, "Tên nhân viên không được để trống!!");
+        DataValidator.validateEmpty(txtName, sb, "Tên Công nhân không được để trống!!");
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
@@ -306,36 +322,87 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             nv.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
             nv.setCongviec(txtJob.getText());
             nv.setDiachi(txtAddress.getText());
-            int manghe = Integer.parseInt(txtMaNghe.getText());
-            CanBoDao dao = new CanBoDao();
+            nv.setMacb(Integer.parseInt(txtmanv.getText()));
+            NhanVienDao dao = new NhanVienDao();
             
             
-            if (dao.insertCB(nv, manghe))
+            if (dao.update(nv))
             {
-                MessageDialogHelper.showMessageDialog(parentForm, "Nhân viên đã được cập nhật thành công!!",
+                MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được cập nhật thành công!!",
                 "Thông báo");
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
-                        "Nhân viên không được cập nhật do lỗi", "Cảnh báo");
+                        "Công nhân không được cập nhật do lỗi", "Cảnh báo");
             }
-            
-            
-            // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng nhân viên
-            
-            if (dao.getLastIdCB() != -1) {
-                int macb = dao.getLastIdCB();
-                
-                // Chèn vào bảng nhân viên
-                dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
-            }
-            
-            
         } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
+        try {
+            // Lấy ra dong được click
+            int row = tblEmployee.getSelectedRow();
+            if (row >= 0) {
+                txtmanv.setText(String.valueOf(tblModel.getValueAt(row, 0)));
+                txtName.setText((String)tblModel.getValueAt(row, 1));
+                txtNamSinh.setText(String.valueOf(tblModel.getValueAt(row, 2)));
+                String gender = (String)tblModel.getValueAt(row, 3);
+                if (gender.equalsIgnoreCase("Nam")) {
+                    rdNam.setSelected(true);
+                    rdNu.setSelected(false);
+                }
+                else {
+                    rdNu.setSelected(true); rdNam.setSelected(false);
+                }
+                txtAddress.setText((String)tblModel.getValueAt(row, 4));
+                txtJob.setText((String)tblModel.getValueAt(row, 5));
+            }
+        } catch (Exception e) {
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_tblEmployeeMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtName, sb, "Tên Công nhân không được để trống!!");
+        DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
+        DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
+        DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
+        
+        // Nếu có lỗi
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
+            return;
+        }
+        
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?", 
+                "Xác nhận") == JOptionPane.NO_OPTION) {
+            return;
+        }
+        try {
+            // Lấy dữ liệu từ trên form xuống
+            CanBoDao dao = new CanBoDao();
+            int manv = Integer.parseInt(txtmanv.getText());
+            
+            
+            
+            if (dao.delete("tbl_nhanvien", "manv",manv))
+            {
+                MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được xóa thành công!!",
+                "Thông báo");
+            }
+            else {
+                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Công nhân không được xóa do lỗi", "Cảnh báo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -362,5 +429,6 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaNghe;
     private javax.swing.JTextField txtNamSinh;
     private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtmanv;
     // End of variables declaration//GEN-END:variables
 }

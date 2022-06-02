@@ -2,7 +2,8 @@ package com.mycompany.qlcb.model;
 
 
 public class Canbo {
-    protected String tencb, gioitinh, diachi;
+    protected String  tencb, gioitinh, diachi;
+    protected int macb;
 
     protected int namsinh;
     public Canbo() {
@@ -25,6 +26,14 @@ public class Canbo {
 
     public String getGioitinh() {
         return gioitinh;
+    }
+
+    public int getMacb() {
+        return macb;
+    }
+
+    public void setMacb(int macb) {
+        this.macb = macb;
     }
 
     public void setGioitinh(String gioitinh) {

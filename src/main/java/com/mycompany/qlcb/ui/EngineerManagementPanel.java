@@ -5,8 +5,8 @@ import com.mycompany.qlcb.dao.KySuDao;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
 import com.mycompany.qlcb.model.Kysu;
-import com.mycompany.qlcb.model.Nhanvien;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -24,7 +24,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     
     private void initTable() {
        tblModel = new DefaultTableModel();
-       tblModel.setColumnIdentifiers(new String[] {"Họ tên","Năm sinh", "Giới tính", 
+       tblModel.setColumnIdentifiers(new String[] {"Mã KS","Họ tên","Năm sinh", "Giới tính", 
            "Địa chỉ", "Ngành đào tạo", "Loại bằng"});
        tblEngineer.setModel(tblModel);
     }
@@ -36,7 +36,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             tblModel.setRowCount(0);
             for (Kysu it:list) {
                 tblModel.addRow(new Object[] {
-                    it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
                     it.getDiachi(), it.getNganhdt(), it.getLoaibang()
                 });
             }
@@ -60,7 +60,6 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        txtmaks = new javax.swing.JTextField();
         txtAddress = new javax.swing.JTextField();
         rdNam = new javax.swing.JRadioButton();
         rdNu = new javax.swing.JRadioButton();
@@ -76,10 +75,10 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         txtDegree = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         txtMaNghe = new javax.swing.JTextField();
-        jLabel15 = new javax.swing.JLabel();
         txtNamSinh = new javax.swing.JTextField();
         jLabel16 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
+        txtmaks = new javax.swing.JTextField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -90,24 +89,16 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Năm sinh");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, -1, -1));
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel4.setText("Giới tính");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, -1, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Địa chỉ");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
-        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 636, 7));
-
-        txtmaks.setPreferredSize(new java.awt.Dimension(9, 22));
-        txtmaks.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtmaksActionPerformed(evt);
-            }
-        });
-        add(txtmaks, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 510, 30));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 310, 636, 7));
 
         txtAddress.setPreferredSize(new java.awt.Dimension(9, 22));
         txtAddress.addActionListener(new java.awt.event.ActionListener() {
@@ -115,15 +106,15 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 txtAddressActionPerformed(evt);
             }
         });
-        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 510, 30));
+        add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 510, 30));
 
         genderGroup.add(rdNam);
         rdNam.setText("Nam");
-        add(rdNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, -1, -1));
+        add(rdNam, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 150, -1, -1));
 
         genderGroup.add(rdNu);
         rdNu.setText("Nữ");
-        add(rdNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 200, -1, -1));
+        add(rdNu, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 150, -1, -1));
 
         btnAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/new-icon-16.png"))); // NOI18N
         btnAdd.setText("Tạo mới");
@@ -132,7 +123,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 btnAddActionPerformed(evt);
             }
         });
-        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 380, -1, -1));
+        add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 330, -1, -1));
 
         btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Save-icon.png"))); // NOI18N
         btnSave.setText("Lưu");
@@ -141,15 +132,25 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 380, -1, -1));
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 330, -1, -1));
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-document-edit-icon-16.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
-        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 380, -1, -1));
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+        add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 330, -1, -1));
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-edit-delete-icon-16.png"))); // NOI18N
         btnDelete.setText("Xóa");
-        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 380, -1, -1));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(580, 330, -1, -1));
 
         tblEngineer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -170,14 +171,19 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 return types [columnIndex];
             }
         });
+        tblEngineer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblEngineerMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblEngineer);
 
-        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 430, 640, 150));
-        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 420, 636, 9));
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 380, 640, 150));
+        add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 636, 9));
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Ngành đào tạo");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, -1, -1));
 
         txtField.setPreferredSize(new java.awt.Dimension(9, 22));
         txtField.addActionListener(new java.awt.event.ActionListener() {
@@ -185,7 +191,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 txtFieldActionPerformed(evt);
             }
         });
-        add(txtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 509, 30));
+        add(txtField, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 509, 30));
 
         txtDegree.setPreferredSize(new java.awt.Dimension(9, 22));
         txtDegree.addActionListener(new java.awt.event.ActionListener() {
@@ -193,11 +199,11 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 txtDegreeActionPerformed(evt);
             }
         });
-        add(txtDegree, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 509, 30));
+        add(txtDegree, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 270, 509, 30));
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Loại bằng");
-        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 320, -1, -1));
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, -1, -1));
 
         txtMaNghe.setText("2");
         txtMaNghe.addActionListener(new java.awt.event.ActionListener() {
@@ -205,11 +211,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 txtMaNgheActionPerformed(evt);
             }
         });
-        add(txtMaNghe, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 540, -1, -1));
-
-        jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setText("Mã kỹ sư");
-        add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        add(txtMaNghe, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 490, -1, -1));
 
         txtNamSinh.setPreferredSize(new java.awt.Dimension(9, 22));
         txtNamSinh.addActionListener(new java.awt.event.ActionListener() {
@@ -217,11 +219,11 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 txtNamSinhActionPerformed(evt);
             }
         });
-        add(txtNamSinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 510, 30));
+        add(txtNamSinh, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 510, 30));
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel16.setText("Họ tên");
-        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, -1));
+        add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, -1, -1));
 
         txtname.setPreferredSize(new java.awt.Dimension(9, 22));
         txtname.addActionListener(new java.awt.event.ActionListener() {
@@ -229,12 +231,9 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 txtnameActionPerformed(evt);
             }
         });
-        add(txtname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 510, 30));
+        add(txtname, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 510, 30));
+        add(txtmaks, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 490, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtmaksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtmaksActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtmaksActionPerformed
 
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
         // TODO add your handling code here:
@@ -256,6 +255,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         txtname.setText("");
         txtAddress.setText("");
         txtDegree.setText("");
+        txtNamSinh.setText("");
         txtmaks.setText("");
         txtField.setText("");
         rdNam.setSelected(true);
@@ -321,6 +321,116 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtnameActionPerformed
 
+    private void tblEngineerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEngineerMouseClicked
+       try {
+            // Lấy ra dong được click
+            int row = tblEngineer.getSelectedRow();
+            if (row >= 0) {
+                txtmaks.setText((String.valueOf(tblModel.getValueAt(row, 0))));
+                txtname.setText((String)tblModel.getValueAt(row, 1));
+                txtNamSinh.setText(String.valueOf(tblModel.getValueAt(row, 2)));
+                String gender = (String)tblModel.getValueAt(row, 3);
+                if (gender.equalsIgnoreCase("Nam")) {
+                    rdNam.setSelected(true);
+                    rdNu.setSelected(false);
+                }
+                else {
+                    rdNu.setSelected(true); rdNam.setSelected(false);
+                }
+                txtAddress.setText((String)tblModel.getValueAt(row, 4));
+                txtField.setText(String.valueOf(tblModel.getValueAt(row, 5)));
+                txtDegree.setText(String.valueOf(tblModel.getValueAt(row, 6)));
+            }
+        } catch (Exception e) {
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_tblEngineerMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+       StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtname, sb, "Tên nhân viên không được để trống!!");
+        DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
+        DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
+        DataValidator.validateEmpty(txtField, sb, "Trường làm việc không được bỏ trống!!");
+        
+        // Nếu có lỗi
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
+            return;
+        }
+        
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?", 
+                "Xác nhận") == JOptionPane.NO_OPTION) {
+            return;
+        }
+        try {
+            // Lấy dữ liệu từ trên form xuống
+            Kysu ks = new Kysu();
+            ks.setTencb(txtname.getText());
+            ks.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
+            ks.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            ks.setNganhdt(txtField.getText());
+            ks.setLoaibang(txtDegree.getText());
+            ks.setDiachi(txtAddress.getText());
+            ks.setMacb(Integer.parseInt(txtmaks.getText()));
+            KySuDao dao = new KySuDao();
+            
+            
+            if (dao.update(ks))
+            {
+                MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được cập nhật thành công!!",
+                "Thông báo");
+            }
+            else {
+                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Kỹ sư không được cập nhật do lỗi", "Cảnh báo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+       
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtname, sb, "Tên Kỹ sư không được để trống!!");
+        DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
+        DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
+        DataValidator.validateEmpty(txtDegree, sb, "Loại bằng không được bỏ trống!!");
+        DataValidator.validateEmpty(txtField, sb, "Ngành làm việc không được bỏ trống!!");
+        // Nếu có lỗi
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
+            return;
+        }
+        
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn xóa kỹ sư không?", 
+                "Xác nhận") == JOptionPane.NO_OPTION) {
+            return;
+        }
+        try {
+            // Lấy dữ liệu từ trên form xuống
+            CanBoDao dao = new CanBoDao();
+            int maks = Integer.parseInt(txtmaks.getText());
+            
+            
+            
+            if (dao.delete("tbl_kysu", "maks",maks))
+            {
+                MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được xóa thành công!!",
+                "Thông báo");
+            }
+            else {
+                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Kỹ sư không được xóa do lỗi", "Cảnh báo");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -329,7 +439,6 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnUpdate;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

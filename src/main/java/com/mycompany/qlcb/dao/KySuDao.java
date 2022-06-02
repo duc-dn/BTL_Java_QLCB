@@ -6,7 +6,6 @@ package com.mycompany.qlcb.dao;
 
 import com.mycompany.qlcb.helpers.DatabaseHelper;
 import com.mycompany.qlcb.model.Kysu;
-import com.mycompany.qlcb.model.Kysu;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,6 +30,7 @@ public class KySuDao {
                 ArrayList<Kysu> listks = new ArrayList<Kysu>();
                 while (rs.next()) {
                     Kysu ks = new Kysu();
+                    ks.setMacb(rs.getInt("macb"));
                     ks.setTencb(rs.getString("tencb"));
                     ks.setNamsinh(rs.getInt("namsinh"));
                     ks.setGioitinh(rs.getString("gioitinh"));
@@ -41,6 +41,26 @@ public class KySuDao {
                 }
                 return listks;
             }
+        }
+    }
+    
+    public boolean update(Kysu ks) throws SQLException, Exception {
+        
+        String sql = "update tbl_canbo, tbl_kysu set tencb=?, namsinh=?, gioitinh=?, diachi=?, nganhdt=?, loaibang=?"
+            + "where tbl_canbo.macb = tbl_kysu.maks and tbl_canbo.macb = ?";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setString(1, ks.getTencb());
+            pstmt.setInt(2, ks.getNamsinh());
+            pstmt.setString(3, ks.getGioitinh());
+            pstmt.setString(4, ks.getDiachi());
+            pstmt.setString(5, ks.getNganhdt());
+            pstmt.setString(6, ks.getLoaibang());
+            pstmt.setInt(7, ks.getMacb());
+            return pstmt.executeUpdate() > 0;
         }
     }
 }

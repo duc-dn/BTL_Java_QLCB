@@ -28,6 +28,7 @@ public class NhanVienDao {
                 ArrayList<Nhanvien> listnv = new ArrayList<Nhanvien>();
                 while (rs.next()) {
                     Nhanvien nv = new Nhanvien();
+                    nv.setMacb(rs.getInt("macb"));
                     nv.setTencb(rs.getString("tencb"));
                     nv.setNamsinh(rs.getInt("namsinh"));
                     nv.setGioitinh(rs.getString("gioitinh"));
@@ -39,4 +40,25 @@ public class NhanVienDao {
             }
         }
     }
+    
+    public boolean update(Nhanvien nv) throws SQLException, Exception {
+        
+        String sql = "update tbl_canbo, tbl_nhanvien set tencb = ?, namsinh = ?, gioitinh = ?, diachi = ?, congviec = ?"
+            + "where tbl_canbo.macb = tbl_nhanvien.manv and tbl_canbo.macb = ?";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setString(1, nv.getTencb());
+            pstmt.setInt(2, nv.getNamsinh());
+            pstmt.setString(3, nv.getGioitinh());
+            pstmt.setString(4, nv.getDiachi());
+            pstmt.setString(5, nv.getCongviec());
+            pstmt.setInt(6, nv.getMacb());
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+    
+   
 }
