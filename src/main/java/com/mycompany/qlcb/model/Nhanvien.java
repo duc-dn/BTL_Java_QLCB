@@ -11,8 +11,8 @@ public class Nhanvien extends Canbo{
         this.congviec = congviec;
     }
 
-    public Nhanvien(String congviec, String tencb, String namsinh, String gioitinh, String diachi) {
-        super(tencb, namsinh, gioitinh, diachi);
+    public Nhanvien(String congviec, String tencb, String gioitinh, String diachi, int namsinh) {
+        super(tencb, gioitinh, diachi, namsinh);
         this.congviec = congviec;
     }
 
@@ -32,14 +32,6 @@ public class Nhanvien extends Canbo{
         this.tencb = tencb;
     }
 
-    public String getNamsinh() {
-        return namsinh;
-    }
-
-    public void setNamsinh(String namsinh) {
-        this.namsinh = namsinh;
-    }
-
     public String getGioitinh() {
         return gioitinh;
     }
@@ -55,5 +47,15 @@ public class Nhanvien extends Canbo{
     public void setDiachi(String diachi) {
         this.diachi = diachi;
     }
+
+    public int getNamsinh() {
+        return namsinh;
+    }
+
+    public void setNamsinh(int namsinh) {
+        this.namsinh = namsinh;
+    }
+
+    
     
 }

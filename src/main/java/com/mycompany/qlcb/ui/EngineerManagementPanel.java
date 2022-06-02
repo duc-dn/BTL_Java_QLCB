@@ -1,24 +1,51 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.mycompany.qlcb.ui;
 
 import com.mycompany.qlcb.dao.CanBoDao;
+import com.mycompany.qlcb.dao.KySuDao;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
 import com.mycompany.qlcb.model.Kysu;
+import com.mycompany.qlcb.model.Nhanvien;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Duc
- */
+
 public class EngineerManagementPanel extends javax.swing.JPanel {
     private MainForm parentForm;
+    private DefaultTableModel tblModel;
+    
     public EngineerManagementPanel() {
         initComponents();
         rdNam.setSelected(true);
         rdNu.setSelected(false);
+        initTable();
+        loadDataToTable();
+    }
+    
+    private void initTable() {
+       tblModel = new DefaultTableModel();
+       tblModel.setColumnIdentifiers(new String[] {"Họ tên","Năm sinh", "Giới tính", 
+           "Địa chỉ", "Ngành đào tạo", "Loại bằng"});
+       tblEngineer.setModel(tblModel);
+    }
+    
+    private void loadDataToTable() {
+        try {
+            KySuDao dao = new KySuDao();
+            ArrayList<Kysu> list = dao.getAllKysu();
+            tblModel.setRowCount(0);
+            for (Kysu it:list) {
+                tblModel.addRow(new Object[] {
+                    it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+                    it.getDiachi(), it.getNganhdt(), it.getLoaibang()
+                });
+            }
+            tblModel.fireTableDataChanged();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
     }
 
 
@@ -254,7 +281,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             // Lấy dữ liệu từ trên form xuống
             Kysu ks = new Kysu();
             ks.setTencb(txtname.getText());
-            ks.setNamsinh(txtmaks.getText());
+            ks.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
             ks.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
             ks.setLoaibang(txtField.getText());
             ks.setDiachi(txtAddress.getText());

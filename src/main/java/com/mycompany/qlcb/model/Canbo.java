@@ -2,16 +2,17 @@ package com.mycompany.qlcb.model;
 
 
 public class Canbo {
-    protected String tencb, namsinh, gioitinh, diachi;
+    protected String tencb, gioitinh, diachi;
 
+    protected int namsinh;
     public Canbo() {
     }
 
-    public Canbo(String tencb, String namsinh, String gioitinh, String diachi) {
+    public Canbo(String tencb, String gioitinh, String diachi, int namsinh) {
         this.tencb = tencb;
-        this.namsinh = namsinh;
         this.gioitinh = gioitinh;
         this.diachi = diachi;
+        this.namsinh = namsinh;
     }
 
     public String getTencb() {
@@ -20,14 +21,6 @@ public class Canbo {
 
     public void setTencb(String tencb) {
         this.tencb = tencb;
-    }
-
-    public String getNamsinh() {
-        return namsinh;
-    }
-
-    public void setNamsinh(String namsinh) {
-        this.namsinh = namsinh;
     }
 
     public String getGioitinh() {
@@ -45,5 +38,15 @@ public class Canbo {
     public void setDiachi(String diachi) {
         this.diachi = diachi;
     }
+
+    public int getNamsinh() {
+        return namsinh;
+    }
+
+    public void setNamsinh(int namsinh) {
+        this.namsinh = namsinh;
+    }
+
+   
     
 }

@@ -6,10 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-/**
- *
- * @author Duc
- */
+
 public class NguoiDungDao {
     public NguoiDung checkLogin(String tenDangNhap, String matKhau) throws Exception {
         String sql = "Select username, password, quyen  from tbl_taikhoan where username = ? and password = ?";

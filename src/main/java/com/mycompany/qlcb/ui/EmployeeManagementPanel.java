@@ -5,16 +5,48 @@ import com.mycompany.qlcb.dao.NhanVienDao;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
 import com.mycompany.qlcb.model.Nhanvien;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 public class EmployeeManagementPanel extends javax.swing.JPanel {
     
     private MainForm parentForm;
+    private DefaultTableModel tblModel;
+    
+    
     public EmployeeManagementPanel() {
         initComponents();
         rdNam.setSelected(true);
         rdNu.setSelected(false);
+        initTable();
+        loadDataToTable();
     }
 
+    private void initTable() {
+       tblModel = new DefaultTableModel();
+       tblModel.setColumnIdentifiers(new String[] {"Họ tên","Năm sinh", "Giới tính", "Địa chỉ", "Công việc"});
+       tblEmployee.setModel(tblModel);
+    }
+    
+    private void loadDataToTable() {
+        try {
+            NhanVienDao dao = new NhanVienDao();
+            ArrayList<Nhanvien> list = dao.getAllNhanVien();
+            tblModel.setRowCount(0);
+            for (Nhanvien it:list) {
+                tblModel.addRow(new Object[] {
+                    it.getTencb(), it.getNamsinh(), it.getGioitinh(), it.getDiachi(), it.getCongviec()
+                });
+            }
+            tblModel.fireTableDataChanged();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -120,13 +152,17 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
 
         btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-document-edit-icon-16.png"))); // NOI18N
         btnUpdate.setText("Cập nhật");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(415, 294, -1, -1));
 
         btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-edit-delete-icon-16.png"))); // NOI18N
         btnDelete.setText("Xóa");
         add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(575, 294, -1, -1));
 
-        tblEmployee.setForeground(new java.awt.Color(255, 204, 0));
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -210,7 +246,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             // Lấy dữ liệu từ trên form xuống
             Nhanvien nv = new Nhanvien();
             nv.setTencb(txtName.getText());
-            nv.setNamsinh(txtNamSinh.getText());
+            nv.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
             nv.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
             nv.setCongviec(txtJob.getText());
             nv.setDiachi(txtAddress.getText());
@@ -244,6 +280,62 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        StringBuilder sb = new StringBuilder();
+        DataValidator.validateEmpty(txtName, sb, "Tên nhân viên không được để trống!!");
+        DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
+        DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
+        DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
+        
+        // Nếu có lỗi
+        if (sb.length() > 0) {
+            MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
+            return;
+        }
+        
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?", 
+                "Xác nhận") == JOptionPane.NO_OPTION) {
+            return;
+        }
+        try {
+            // Lấy dữ liệu từ trên form xuống
+            Nhanvien nv = new Nhanvien();
+            nv.setTencb(txtName.getText());
+            nv.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
+            nv.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            nv.setCongviec(txtJob.getText());
+            nv.setDiachi(txtAddress.getText());
+            int manghe = Integer.parseInt(txtMaNghe.getText());
+            CanBoDao dao = new CanBoDao();
+            
+            
+            if (dao.insertCB(nv, manghe))
+            {
+                MessageDialogHelper.showMessageDialog(parentForm, "Nhân viên đã được cập nhật thành công!!",
+                "Thông báo");
+            }
+            else {
+                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Nhân viên không được cập nhật do lỗi", "Cảnh báo");
+            }
+            
+            
+            // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng nhân viên
+            
+            if (dao.getLastIdCB() != -1) {
+                int macb = dao.getLastIdCB();
+                
+                // Chèn vào bảng nhân viên
+                dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
+            }
+            
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
