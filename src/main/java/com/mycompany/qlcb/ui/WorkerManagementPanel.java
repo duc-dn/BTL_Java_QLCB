@@ -201,7 +201,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         StringBuilder sb = new StringBuilder();
-        DataValidator.validateEmpty(txtName, sb, "Tên nhân viên không được để trống!!");
+        DataValidator.validateEmpty(txtName, sb, "Tên Công nhân không được để trống!!");
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtBac, sb, "Bậc không được bỏ trống!!");
@@ -225,12 +225,21 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             CanBoDao dao = new CanBoDao();
             if (dao.insertCB(cn, manghe))
             {
-                MessageDialogHelper.showMessageDialog(parentForm, "Nhân viên đã được thêm thành công!!",
+                MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được thêm thành công!!",
                 "Thông báo");
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
-                        "Nhân viên không được lưu do lỗi", "Cảnh báo");
+                        "Công nhân không được lưu do lỗi", "Cảnh báo");
+            }
+            
+            // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng Công nhân
+            
+            if (dao.getLastIdCB() != -1) {
+                int macb = dao.getLastIdCB();
+                
+                // Chèn vào bảng Công nhân
+                dao.insertTable("tbl_congnhan", macb, txtBac.getText(), "");
             }
         } catch (Exception e) {
             e.printStackTrace();

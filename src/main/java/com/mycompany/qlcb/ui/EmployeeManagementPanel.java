@@ -216,6 +216,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             nv.setDiachi(txtAddress.getText());
             int manghe = Integer.parseInt(txtMaNghe.getText());
             CanBoDao dao = new CanBoDao();
+            
+            
             if (dao.insertCB(nv, manghe))
             {
                 MessageDialogHelper.showMessageDialog(parentForm, "Nhân viên đã được thêm thành công!!",
@@ -225,6 +227,18 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
                         "Nhân viên không được lưu do lỗi", "Cảnh báo");
             }
+            
+            
+            // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng nhân viên
+            
+            if (dao.getLastIdCB() != -1) {
+                int macb = dao.getLastIdCB();
+                
+                // Chèn vào bảng nhân viên
+                dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
+            }
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
