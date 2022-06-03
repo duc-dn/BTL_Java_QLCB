@@ -272,7 +272,6 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             
             if (dao.insertCB(nv, manghe))
             {
-                loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được thêm thành công!!",
                 "Thông báo");
             }
@@ -289,6 +288,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 
                 // Chèn vào bảng Công nhân
                 dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
+                loadDataToTable();
             }
             
             
@@ -329,9 +329,9 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             
             if (dao.update(nv))
             {
+                loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được cập nhật thành công!!",
                 "Thông báo");
-                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 

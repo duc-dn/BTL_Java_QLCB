@@ -378,9 +378,9 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             
             if (dao.update(ks))
             {
+                loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được cập nhật thành công!!",
                 "Thông báo");
-                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
@@ -419,9 +419,9 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             
             if (dao.delete("tbl_kysu", "maks",maks))
             {
+                loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được xóa thành công!!",
                 "Thông báo");
-                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 

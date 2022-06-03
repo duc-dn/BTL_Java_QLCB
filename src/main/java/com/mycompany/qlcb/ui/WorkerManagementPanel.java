@@ -267,9 +267,9 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             CanBoDao dao = new CanBoDao();
             if (dao.insertCB(cn, manghe))
             {
+                
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được thêm thành công!!",
                 "Thông báo");
-                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
@@ -283,6 +283,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                 
                 // Chèn vào bảng Công nhân
                 dao.insertTable("tbl_congnhan", macb, txtBac.getText(), "");
+                loadDataToTable();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -345,9 +346,9 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             
             if (dao.update(ks))
             {
+                loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được cập nhật thành công!!",
                 "Thông báo");
-                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
@@ -385,9 +386,9 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
             
             if (dao.delete("tbl_congnhan", "macn",macn))
             {
+                loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được xóa thành công!!",
                 "Thông báo");
-                loadDataToTable();
             }
             else {
                 MessageDialogHelper.showConfirmDialog(parentForm, 
