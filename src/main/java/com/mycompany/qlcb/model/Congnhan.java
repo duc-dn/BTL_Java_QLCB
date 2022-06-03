@@ -16,6 +16,23 @@ public class Congnhan extends Canbo{
         this.bac = bac;
     }
 
+    
+    public int getMacb() {
+        return macb;
+    }
+
+    public void setMacb(int macb) {
+        this.macb = macb;
+    }
+
+    public int getManghe() {
+        return manghe;
+    }
+
+    public void setManghe(int manghe) {
+        this.manghe = manghe;
+    }
+
     public int getBac() {
         return bac;
     }

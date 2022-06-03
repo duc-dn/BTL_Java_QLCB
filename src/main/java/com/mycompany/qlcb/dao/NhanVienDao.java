@@ -2,6 +2,7 @@ package com.mycompany.qlcb.dao;
 
 import com.mycompany.qlcb.helpers.DatabaseHelper;
 import com.mycompany.qlcb.model.Nhanvien;
+import com.mycompany.qlcb.model.Nhanvien;
 import java.awt.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -37,6 +38,60 @@ public class NhanVienDao {
                     listnv.add(nv);
                 }
                 return listnv;
+            }
+        }
+    }
+    
+    // Tìm kiếm thông tin nhân viên
+    public ArrayList<Nhanvien> findNhanVien(String info) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join "
+                + "tbl_nhanvien nv on cb.macb = nv.manv "
+                + "where tencb like" + info + " or namsinh like" + info + " or gioitinh like " + info
+                + " or diachi like " + info + "or congviec like " + info;
+
+        try 
+        (
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+        ) 
+        {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                ArrayList<Nhanvien> listnv = new ArrayList<Nhanvien>();
+                while (rs.next()) {
+                    Nhanvien nv = new Nhanvien();
+                    nv.setMacb(rs.getInt("macb"));
+                    nv.setTencb(rs.getString("tencb"));
+                    nv.setNamsinh(rs.getInt("namsinh"));
+                    nv.setGioitinh(rs.getString("gioitinh"));
+                    nv.setDiachi(rs.getString("diachi"));
+                    nv.setCongviec(rs.getString("congviec"));
+                    listnv.add(nv);
+                }
+                return listnv;
+            }
+        }
+    }
+    
+    public Nhanvien getDetailNhanVien(int macb) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join tbl_nhanvien nv on cb.macb = nv.manv where macb = " + macb;
+
+        try 
+        (
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+        ) 
+        {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                Nhanvien nv = new Nhanvien();
+                while (rs.next()) {
+                    nv.setMacb(rs.getInt("macb"));
+                    nv.setTencb(rs.getString("tencb"));
+                    nv.setNamsinh(rs.getInt("namsinh"));
+                    nv.setGioitinh(rs.getString("gioitinh"));
+                    nv.setDiachi(rs.getString("diachi"));
+                    nv.setCongviec(rs.getString("congviec"));
+                }
+                return nv;
             }
         }
     }

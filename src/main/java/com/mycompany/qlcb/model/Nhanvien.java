@@ -7,10 +7,6 @@ public class Nhanvien extends Canbo{
     public Nhanvien() {
     }
 
-    public Nhanvien(String congviec) {
-        this.congviec = congviec;
-    }
-
     public Nhanvien(String congviec, String tencb, String gioitinh, String diachi, int namsinh) {
         super(tencb, gioitinh, diachi, namsinh);
         this.congviec = congviec;
@@ -18,6 +14,14 @@ public class Nhanvien extends Canbo{
 
     public String getCongviec() {
         return congviec;
+    }
+
+    public int getManghe() {
+        return manghe;
+    }
+
+    public void setManghe(int manghe) {
+        this.manghe = manghe;
     }
 
     public void setCongviec(String congviec) {

@@ -44,6 +44,62 @@ public class KySuDao {
         }
     }
     
+    public ArrayList<Kysu> findKysu(String info) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join "
+                + "tbl_kysu ks on cb.macb = ks.maks "
+                + "where tencb like" + info + " or namsinh like" + info + " or gioitinh like " + info
+                + " or diachi like " + info + "or nganhdt like " + info + " or loaibang like " + info;
+
+        try 
+        (
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+        ) 
+        {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                ArrayList<Kysu> listks = new ArrayList<Kysu>();
+                while (rs.next()) {
+                    Kysu ks = new Kysu();
+                    ks.setMacb(rs.getInt("macb"));
+                    ks.setTencb(rs.getString("tencb"));
+                    ks.setNamsinh(rs.getInt("namsinh"));
+                    ks.setGioitinh(rs.getString("gioitinh"));
+                    ks.setDiachi(rs.getString("diachi"));
+                    ks.setNganhdt(rs.getString("nganhdt"));
+                    ks.setNganhdt(rs.getString("loaibang"));
+                    listks.add(ks);
+                }
+                return listks;
+            }
+        }
+    }
+    
+    public Kysu getDetailKySu(int macb) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join tbl_kysu ks on cb.macb = ks.maks where macb = " + macb;
+
+        try 
+        (
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+        ) 
+        {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                Kysu ks = new Kysu();
+                while (rs.next()) {
+                    
+                    ks.setMacb(rs.getInt("macb"));
+                    ks.setTencb(rs.getString("tencb"));
+                    ks.setNamsinh(rs.getInt("namsinh"));
+                    ks.setGioitinh(rs.getString("gioitinh"));
+                    ks.setDiachi(rs.getString("diachi"));
+                    ks.setNganhdt(rs.getString("nganhdt"));
+                    ks.setLoaibang(rs.getString("loaibang"));
+                }
+                return ks;
+            }
+        }
+    }
+    
     public boolean update(Kysu ks) throws SQLException, Exception {
         
         String sql = "update tbl_canbo, tbl_kysu set tencb=?, namsinh=?, gioitinh=?, diachi=?, nganhdt=?, loaibang=?"

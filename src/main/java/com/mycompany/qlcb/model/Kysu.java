@@ -19,6 +19,22 @@ public class Kysu extends Canbo{
         this.loaibang = loaibang;
     }
 
+    public int getMacb() {
+        return macb;
+    }
+
+    public void setMacb(int macb) {
+        this.macb = macb;
+    }
+
+    public int getManghe() {
+        return manghe;
+    }
+
+    public void setManghe(int manghe) {
+        this.manghe = manghe;
+    }
+
     public String getNganhdt() {
         return nganhdt;
     }

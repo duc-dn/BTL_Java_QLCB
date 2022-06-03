@@ -36,6 +36,59 @@ public class CongNhanDao {
         }
     }
     
+    public ArrayList<Congnhan> findCongnhan(String info) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join "
+                + "tbl_congnhan cn on cb.macb = cn.macn "
+                + "where tencb like" + info + " or namsinh like" + info + " or gioitinh like " + info
+                + " or diachi like " + info + "or bac like " + info;
+
+        try 
+        (
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+        ) 
+        {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                ArrayList<Congnhan> listcn = new ArrayList<Congnhan>();
+                while (rs.next()) {
+                    Congnhan cn = new Congnhan();
+                    cn.setMacb(rs.getInt("macb"));
+                    cn.setTencb(rs.getString("tencb"));
+                    cn.setNamsinh(rs.getInt("namsinh"));
+                    cn.setGioitinh(rs.getString("gioitinh"));
+                    cn.setDiachi(rs.getString("diachi"));
+                    cn.setBac(rs.getInt("bac"));
+                    listcn.add(cn);
+                }
+                return listcn;
+            }
+        }
+    }
+    public Congnhan getDetailCongNhan(int macb) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join tbl_congnhan cn on cb.macb = cn.macn where macb = " + macb;
+
+        try 
+        (
+            Connection con = DatabaseHelper.openConnection();
+            PreparedStatement pstmt = con.prepareStatement(sql);
+        ) 
+        {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                Congnhan cn = new Congnhan();
+                while (rs.next()) {
+                    
+                    cn.setMacb(rs.getInt("macb"));
+                    cn.setTencb(rs.getString("tencb"));
+                    cn.setNamsinh(rs.getInt("namsinh"));
+                    cn.setGioitinh(rs.getString("gioitinh"));
+                    cn.setDiachi(rs.getString("diachi"));
+                    cn.setBac(rs.getInt("bac"));
+                }
+                return cn;
+            }
+        }
+    }
+    
     public boolean update(Congnhan cn) throws SQLException, Exception {
         
         String sql = "update tbl_canbo, tbl_congnhan set tencb = ?, namsinh = ?, gioitinh = ?, diachi = ?, bac = ? where tbl_canbo.macb = tbl_congnhan.macn and tbl_canbo.macb = ?";

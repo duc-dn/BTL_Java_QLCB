@@ -2,11 +2,14 @@ package com.mycompany.qlcb.dao;
 
 import com.mycompany.qlcb.helpers.DatabaseHelper;
 import com.mycompany.qlcb.model.Canbo;
+import com.mycompany.qlcb.model.Congnhan;
+import com.mycompany.qlcb.model.Kysu;
 import com.mycompany.qlcb.model.Nhanvien;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class CanBoDao {
 
@@ -83,64 +86,154 @@ public class CanBoDao {
         if (table.equalsIgnoreCase("tbl_kysu")) {
             String sql = "update tbl_canbo, " + table + " set tencb = ?, "
                     + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, loaibang = ?"
-                    + "where tbl_canbo.macb = tbl_nhanvien.manv"
+                    + "where tbl_canbo.macb = tbl_nhacbien.macb"
                     + "and macb = ?";
 
             try (
-                Connection con = DatabaseHelper.openConnection();
-                PreparedStatement pstmt = con.prepareStatement(sql);) 
-                {
-                    pstmt.setString(1, cb.getTencb());
-                    pstmt.setInt(2, cb.getNamsinh());
-                    pstmt.setString(3, cb.getGioitinh());
-                    pstmt.setString(4, cb.getDiachi());
-                    pstmt.setString(5, filed1);
-                    pstmt.setString(6, filed2);
-                    pstmt.setInt(7, cb.getMacb());
-                }
-        }
-        else {
+                    Connection con = DatabaseHelper.openConnection();
+                    PreparedStatement pstmt = con.prepareStatement(sql);) {
+                pstmt.setString(1, cb.getTencb());
+                pstmt.setInt(2, cb.getNamsinh());
+                pstmt.setString(3, cb.getGioitinh());
+                pstmt.setString(4, cb.getDiachi());
+                pstmt.setString(5, filed1);
+                pstmt.setString(6, filed2);
+                pstmt.setInt(7, cb.getMacb());
+            }
+        } else {
             String sql;
-            if (table.equalsIgnoreCase("tbl_nhanvien")) {
+            if (table.equalsIgnoreCase("tbl_nhacbien")) {
                 sql = "update tbl_canbo, " + table + " set tencb = ?, "
-                    + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, congviec = ?"
-                    + "where tbl_canbo.macb = tbl_nhanvien.manv"
-                    + "and macb = ?";
-            }
-            else {
+                        + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, congviec = ?"
+                        + "where tbl_canbo.macb = tbl_nhacbien.macb"
+                        + "and macb = ?";
+            } else {
                 sql = "update tbl_canbo, " + table + " set tencb = ?, "
-                    + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, bac = ?"
-                    + "where tbl_canbo.macb = tbl_nhanvien.manv"
-                    + "and macb = ?";
+                        + "namsinh = ?, gioitinh = ?, diachi = ?, nganhdt = ?, bac = ?"
+                        + "where tbl_canbo.macb = tbl_nhacbien.macb"
+                        + "and macb = ?";
             }
-            
 
             try (
-                Connection con = DatabaseHelper.openConnection();
-                PreparedStatement pstmt = con.prepareStatement(sql);) 
-                {
-                    pstmt.setString(1, cb.getTencb());
-                    pstmt.setInt(2, cb.getNamsinh());
-                    pstmt.setString(3, cb.getGioitinh());
-                    pstmt.setString(4, cb.getDiachi());
-                    pstmt.setString(5, filed1);
-                    pstmt.setInt(6, cb.getMacb());
-                }
+                    Connection con = DatabaseHelper.openConnection();
+                    PreparedStatement pstmt = con.prepareStatement(sql);) {
+                pstmt.setString(1, cb.getTencb());
+                pstmt.setInt(2, cb.getNamsinh());
+                pstmt.setString(3, cb.getGioitinh());
+                pstmt.setString(4, cb.getDiachi());
+                pstmt.setString(5, filed1);
+                pstmt.setInt(6, cb.getMacb());
+            }
         }
 
     }
-    
-     public boolean delete(String table, String ma, int macb) throws SQLException, Exception {
-        
-        String sql = "DELETE tbl_canbo.*, " + table + ".* from tbl_canbo inner join " 
-                + table + " on tbl_canbo.macb = " + table+"."+ ma + " where tbl_canbo.macb = ?;";
-            
+
+    public boolean delete(String table, String ma, int macb) throws SQLException, Exception {
+
+        String sql = "DELETE tbl_canbo.*, " + table + ".* from tbl_canbo inner join "
+                + table + " on tbl_canbo.macb = " + table + "." + ma + " where tbl_canbo.macb = ?;";
+
         try (
-        Connection con = DatabaseHelper.openConnection();
-        PreparedStatement pstmt = con.prepareStatement(sql);) 
-        {
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
             pstmt.setInt(1, macb);
             return pstmt.executeUpdate() > 0;
         }
+    }
+
+    // Lấy thông tin tất cả các cán bộ hiển thị trên panel thống kê
+    public ArrayList<Canbo> getAllCanBo() throws SQLException, Exception {
+        String sql = "select * from tbl_canbo inner join tbl_nghe on tbl_canbo.manghe = tbl_nghe.manghe";
+
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                ArrayList<Canbo> listcb = new ArrayList<Canbo>();
+                while (rs.next()) {
+                    Canbo cb = new Canbo();
+                    cb.setMacb(rs.getInt("macb"));
+                    cb.setTencb(rs.getString("tencb"));
+                    cb.setNamsinh(rs.getInt("namsinh"));
+                    cb.setGioitinh(rs.getString("gioitinh"));
+                    cb.setDiachi(rs.getString("diachi"));
+                    cb.setManghe(rs.getInt("manghe"));
+                    cb.setTennghe(rs.getString("tennghe"));
+                    listcb.add(cb);
+                }
+                return listcb;
+            }
+        }
+    }
+    
+    public Congnhan getDetailCn(int macb) throws SQLException, Exception {
+        String sql = "SELECT * FROM tbl_canbo inner join tbl_congnhan on macb = macn where macb = " + macb;
+        Congnhan cn;
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    CongNhanDao dao = new CongNhanDao();
+                    cn = dao.getDetailCongNhan(macb);
+                    return cn;
+                }
+                
+            }
+        }
+        return null;
+    }
+    
+     public Kysu getDetailKs(int macb) throws SQLException, Exception {
+        String sql = "SELECT * FROM tbl_canbo inner join tbl_kysu on macb = maks where macb = " + macb;
+        Kysu ks;
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    KySuDao dao = new KySuDao();
+                    ks = dao.getDetailKySu(macb);
+                    return ks;
+                }
+                
+            }
+        }
+        return null;
+    }
+     
+     public Nhanvien getDetailNv(int macb) throws SQLException, Exception {
+        String sql = "SELECT * FROM tbl_canbo inner join tbl_nhanvien on macb = manv where macb = " + macb;
+        Nhanvien nv;
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    NhanVienDao dao = new NhanVienDao();
+                    nv = dao.getDetailNhanVien(macb);
+                    return nv;
+                }
+                
+            }
+        }
+        return null;
+    }
+    
+    public int getManghe(int macb) throws SQLException, Exception {
+        String sql = "select manghe from tbl_canbo where macb = " + macb;
+        int manghe;
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    manghe = rs.getInt("manghe");
+                    return manghe;
+                }
+
+            }
+        }
+        return -1;
     }
 }

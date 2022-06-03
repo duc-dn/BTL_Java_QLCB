@@ -9,7 +9,7 @@ public class MainForm extends javax.swing.JFrame {
     private WorkerManagementPanel mWorkerPanel;
     private EngineerManagementPanel mEngineerPanel;
     private EmployeeManagementPanel mEmployeePanel;
-    
+    private SatisticManagementPanel mSatisticPanel;
     
     public MainForm() {
         initComponents();
@@ -56,6 +56,8 @@ public class MainForm extends javax.swing.JFrame {
         mnuManageEngineer = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         mnuManageEmployee = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        mnuSatistic = new javax.swing.JMenuItem();
         mnuAboutUs = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator8 = new javax.swing.JPopupMenu.Separator();
@@ -201,6 +203,18 @@ public class MainForm extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        jMenu4.setText("Thống kê");
+
+        mnuSatistic.setText("Thống kê và tìm kiếm");
+        mnuSatistic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSatisticActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnuSatistic);
+
+        jMenuBar1.add(jMenu4);
+
         mnuAboutUs.setText("Trợ giúp");
 
         jMenuItem5.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F1, java.awt.event.InputEvent.CTRL_DOWN_MASK));
@@ -250,7 +264,7 @@ public class MainForm extends javax.swing.JFrame {
             mEmployeePanel = new EmployeeManagementPanel();
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
         }
-        tplMainBoard.setSelectedComponent(mEmployeePanel);
+        tplMainBoard.setSelectedComponent(mSatisticPanel);
     }//GEN-LAST:event_mnuManageEmployeeActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
@@ -329,6 +343,14 @@ public class MainForm extends javax.swing.JFrame {
 //        dialog.setVisible(true);
     }//GEN-LAST:event_formWindowOpened
 
+    private void mnuSatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSatisticActionPerformed
+        if (mSatisticPanel == null) {
+            mSatisticPanel = new SatisticManagementPanel();
+            tplMainBoard.addTab("Thống kê và tìm kiếm", mSatisticPanel);
+        }
+        tplMainBoard.setSelectedComponent(mSatisticPanel);
+    }//GEN-LAST:event_mnuSatisticActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -368,6 +390,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem5;
@@ -389,6 +412,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuManageEmployee;
     private javax.swing.JMenuItem mnuManageEngineer;
     private javax.swing.JMenuItem mnuManageWorker;
+    private javax.swing.JMenuItem mnuSatistic;
     private javax.swing.JButton tbrAboutUs;
     private javax.swing.JButton tbrLogout;
     private javax.swing.JButton tbrQLCN;
