@@ -80,7 +80,20 @@ public class CanBoDao {
         }
 
     }
-
+    //Thêm tài kho?n
+    public boolean insertTaiKhoan(String username, String password, int macb, int quyen) throws SQLException, Exception {
+        String sql = "Insert into tbl_taikhoan(username, password, macb, quyen) values (?,?,?,?)";
+        try (
+            Connection con = DatabaseHelper.openConnection();  
+            PreparedStatement pstmt = con.prepareStatement(sql);) {
+            pstmt.setString(1, username);
+            pstmt.setString(2, password);
+            pstmt.setInt(3, macb);             
+            pstmt.setInt(4, quyen);            
+           
+            return pstmt.executeUpdate() > 0;
+            }
+    }
     // Cập nhật thông tin
     public void update(String table, Canbo cb, String filed1, String filed2) throws SQLException, Exception {
         if (table.equalsIgnoreCase("tbl_kysu")) {
@@ -235,5 +248,57 @@ public class CanBoDao {
             }
         }
         return -1;
+    }
+    // Lấy ra thông tin ngu?i dùng
+    public Canbo getDataND(int maCB) throws SQLException, Exception {
+        String sql = "SELECT * FROM tbl_canbo where macb = " + String.valueOf(maCB);
+
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                if (rs.next()) {
+                    Canbo cb = new Canbo();                    
+                    cb.setMacb(maCB);
+                    cb.setTencb(rs.getString("tencb"));                    
+                    cb.setNamsinh(rs.getInt("namsinh"));
+                    cb.setGioitinh(rs.getString("gioitinh"));
+                    cb.setDiachi(rs.getString("diachi"));
+                     return cb;
+                }
+            }
+        }
+        return null;
+    }
+    //update cán b?
+    public boolean update(String pw, int macb) throws SQLException, Exception {
+        
+        String sql = "update tbl_taikhoan SET password = ?"
+            + "where tbl_taikhoan.macb = ?";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setString(1, pw);            
+            pstmt.setInt(2, macb);
+
+            return pstmt.executeUpdate() > 0;
+        }
+    }
+    //check password
+    public boolean checkPw(String pw, int macb) throws SQLException, Exception {
+        
+        String sql = "select password form tbl_taikhoan where password = ? AND macb=?";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setString(1, pw);            
+            pstmt.setInt(2, macb);
+
+            return true;
+        }
     }
 }
