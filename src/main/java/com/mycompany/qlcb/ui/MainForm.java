@@ -1,8 +1,10 @@
 package com.mycompany.qlcb.ui;
+
+import com.mycompany.qlcb.helpers.SharedData;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-
-
 
 public class MainForm extends javax.swing.JFrame {
 
@@ -10,21 +12,21 @@ public class MainForm extends javax.swing.JFrame {
     private EngineerManagementPanel mEngineerPanel;
     private EmployeeManagementPanel mEmployeePanel;
     private SatisticManagementPanel mSatisticPanel;
-    
+    private nguoidungPanel mNguoiDungPanel;
+
     public MainForm() {
         initComponents();
         setTitle("Nhóm 11 - Quản lý cán bộ");
-        
+
         // căn giua màn hình
         setLocationRelativeTo(null);
-        
+
         // phong to kich thuoc cua so main form
         setExtendedState(getExtendedState() | JFrame.MAXIMIZED_BOTH);
         // Khoi tao form login
 //        LoginDialog dialog = new LoginDialog(this, true);
 //        dialog.setVisible(true);
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -44,7 +46,11 @@ public class MainForm extends javax.swing.JFrame {
         tbrQLNV = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         tbrAboutUs = new javax.swing.JButton();
+        jSeparator10 = new javax.swing.JToolBar.Separator();
         tplMainBoard = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        txtTen = new javax.swing.JLabel();
+        txtQuyen = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -141,6 +147,32 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(tbrAboutUs);
+        jToolBar1.add(jSeparator10);
+
+        txtTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        txtTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        txtQuyen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+                    .addComponent(txtQuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(54, 54, 54))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         jMenu1.setText("Hệ thống");
 
@@ -242,17 +274,25 @@ public class MainForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(72, 72, 72)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addComponent(jToolBar1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+                .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -268,7 +308,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuManageEmployeeActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuFile_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFile_ExitActionPerformed
@@ -279,7 +319,7 @@ public class MainForm extends javax.swing.JFrame {
     private void mnuManageWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuManageWorkerActionPerformed
         if (mWorkerPanel == null) {
             mWorkerPanel = new WorkerManagementPanel();
-        
+
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
@@ -298,7 +338,7 @@ public class MainForm extends javax.swing.JFrame {
     private void tbrQLCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLCNActionPerformed
         if (mWorkerPanel == null) {
             mWorkerPanel = new WorkerManagementPanel();
-        
+
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
@@ -308,7 +348,7 @@ public class MainForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (mEngineerPanel == null) {
             mEngineerPanel = new EngineerManagementPanel();
-            
+
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
         }
         tplMainBoard.setSelectedComponent(mEngineerPanel);
@@ -317,7 +357,7 @@ public class MainForm extends javax.swing.JFrame {
     private void tbrQLKSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLKSActionPerformed
         if (mEngineerPanel == null) {
             mEngineerPanel = new EngineerManagementPanel();
-            
+
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
         }
         tplMainBoard.setSelectedComponent(mEngineerPanel);
@@ -331,16 +371,29 @@ public class MainForm extends javax.swing.JFrame {
         tplMainBoard.setSelectedComponent(mEmployeePanel);
     }//GEN-LAST:event_tbrQLNVActionPerformed
 
-    
     // Xu ly logout
     private void tbrLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrLogoutActionPerformed
-        LoginDialog loginDialog = new LoginDialog(this, true);
-        loginDialog.setVisible(true);
+        try {
+            tplMainBoard.removeAll();
+            LoginDialog loginDialog = new LoginDialog(this, true);
+            loginDialog.setVisible(true);
+            processLogin();
+            
+        } catch (Exception ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_tbrLogoutActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-//        LoginDialog dialog = new LoginDialog(this, true);
-//        dialog.setVisible(true);
+        try {
+            LoginDialog dialog = new LoginDialog(this, true);
+            dialog.setVisible(true);
+            processLogin();
+        } catch (Exception ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void mnuSatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSatisticActionPerformed
@@ -350,6 +403,33 @@ public class MainForm extends javax.swing.JFrame {
         }
         tplMainBoard.setSelectedComponent(mSatisticPanel);
     }//GEN-LAST:event_mnuSatisticActionPerformed
+
+    private void processLogin() throws Exception {
+        txtTen.setText(SharedData.nguoiDangNhap.getTenDangNhap());
+        txtQuyen.setText(SharedData.nguoiDangNhap.getVaiTro());
+        if (!SharedData.nguoiDangNhap.getVaiTro().equals("Quản trị viên")) {
+            mnuManageWorker.setEnabled(false);
+            mnuManageEmployee.setEnabled(false);
+            mnuManageEngineer.setEnabled(false);
+            tbrQLNV.setEnabled(false);
+            tbrQLKS.setEnabled(false);
+            tbrQLCN.setEnabled(false);
+            if (mNguoiDungPanel == null) {
+                mNguoiDungPanel = new nguoidungPanel();
+
+                tplMainBoard.addTab("Thông tin cá nhân", mNguoiDungPanel);
+            }
+            tplMainBoard.setSelectedComponent(mNguoiDungPanel);
+
+        } else {
+            mnuManageWorker.setEnabled(true);
+            mnuManageEmployee.setEnabled(true);
+            mnuManageEngineer.setEnabled(true);
+            tbrQLNV.setEnabled(true);
+            tbrQLKS.setEnabled(true);
+            tbrQLCN.setEnabled(true);
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -397,7 +477,9 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JToolBar.Separator jSeparator10;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
@@ -419,5 +501,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton tbrQLKS;
     private javax.swing.JButton tbrQLNV;
     private javax.swing.JTabbedPane tplMainBoard;
+    private javax.swing.JLabel txtQuyen;
+    private javax.swing.JLabel txtTen;
     // End of variables declaration//GEN-END:variables
 }

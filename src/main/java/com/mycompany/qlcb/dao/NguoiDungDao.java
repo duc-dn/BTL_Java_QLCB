@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 
 public class NguoiDungDao {
     public NguoiDung checkLogin(String tenDangNhap, String matKhau) throws Exception {
-        String sql = "Select username, password, quyen  from tbl_taikhoan where username = ? and password = ?";
+        String sql = "Select username, password,macb, quyen  from tbl_taikhoan where username = ? and password = ?";
         try
         (
             Connection con = openConnection();
@@ -22,14 +22,27 @@ public class NguoiDungDao {
                 if (rs.next()) {
                     NguoiDung nd = new NguoiDung();
                     nd.setTenDangNhap(tenDangNhap);
-                    nd.setVaiTro(rs.getString("quyen"));
-                    System.out.println("TK" + rs.getString("username")+ " " + tenDangNhap);
-                    System.out.println("MK" + rs.getString("password")+ " " + matKhau);
+                    nd.setMaCB(rs.getInt("macb"));
+                    int quyen = rs.getInt("quyen");
+                    if(quyen == 0){
+                        nd.setVaiTro("Quản trị viên");
+                    }
+                    if(quyen == 1){
+                        nd.setVaiTro("Công nhân");
+                    }
+                    if(quyen == 2){
+                        nd.setVaiTro("Kỹ sư");
+                    }
+                    if(quyen == 2){
+                        nd.setVaiTro("Nhân viên");
+                    }
                     return nd;
+                    
                 }
             }
         }
         
         return null;
     }    
+    
 }
