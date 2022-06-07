@@ -17,8 +17,9 @@ import java.util.ArrayList;
  * @author Duc
  */
 public class KySuDao {
-    public ArrayList<Kysu> getAllKysu() throws SQLException, Exception {
-        String sql = "select * from tbl_canbo cb inner join tbl_kysu ks on cb.macb = ks.maks";
+    // Lấy thông tin kỹ sư từ database trả về một list để hiển thị lên table
+    public ArrayList<Kysu> getAllKysu(String field, String type) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join tbl_kysu ks on cb.macb = ks.maks order by " + field + " " + type;
 
         try 
         (
@@ -44,6 +45,7 @@ public class KySuDao {
         }
     }
     
+    // Tìm kiếm thông tin kỹ sư
     public ArrayList<Kysu> findKysu(String info) throws SQLException, Exception {
         String sql = "select * from tbl_canbo cb inner join "
                 + "tbl_kysu ks on cb.macb = ks.maks "
@@ -74,6 +76,7 @@ public class KySuDao {
         }
     }
     
+    // Lấy thông tin chi tiết của kỹ sư
     public Kysu getDetailKySu(int macb) throws SQLException, Exception {
         String sql = "select * from tbl_canbo cb inner join tbl_kysu ks on cb.macb = ks.maks where macb = " + macb;
 
@@ -100,10 +103,10 @@ public class KySuDao {
         }
     }
     
+    // Cập nhật thông tin kỹ sư (nút Update)
     public boolean update(Kysu ks) throws SQLException, Exception {
         
-        String sql = "update tbl_canbo, tbl_kysu set tencb=?, namsinh=?, gioitinh=?, diachi=?, nganhdt=?, loaibang=?"
-            + "where tbl_canbo.macb = tbl_kysu.maks and tbl_canbo.macb = ?";
+        String sql = "select * from tbl_canbo cb inner join tbl_kysu ks on cb.macb = ks.maks order by";
             
         try (
         Connection con = DatabaseHelper.openConnection();
@@ -118,5 +121,33 @@ public class KySuDao {
             pstmt.setInt(7, ks.getMacb());
             return pstmt.executeUpdate() > 0;
         }
+    }
+    
+    
+    public ArrayList<Kysu> sortEngineer(String filed, String type) throws SQLException, Exception {
+        
+        ArrayList<Kysu> list = null;
+        String sortType = "ASC";
+        String f = "tencb";
+        if (type.equalsIgnoreCase("Giảm dần")) sortType = "DESC";
+        else sortType = "ASC";
+        
+        if (filed.equalsIgnoreCase("Năm sinh")) {
+            f = "namsinh";
+        } 
+        else if (filed.equalsIgnoreCase("Giới tính")) {
+            f = "gioitinh";
+        }
+        else if (filed.equalsIgnoreCase("Địa chỉ")) {
+            f = "diachi";
+        }
+        else if (filed.equalsIgnoreCase("Ngành đào tạo")) {
+            f = "nganhdt";
+        }
+        else if (filed.equalsIgnoreCase("Loại bằng")) {
+            f = "loaibang";
+        }
+        list = getAllKysu(f, sortType);
+        return list;
     }
 }

@@ -80,7 +80,9 @@ public class CanBoDao {
         }
 
     }
-    //Thêm tài kho?n
+    
+    
+    //Thêm tài khoản
     public boolean insertTaiKhoan(String username, String password, int macb, int quyen) throws SQLException, Exception {
         String sql = "Insert into tbl_taikhoan(username, password, macb, quyen) values (?,?,?,?)";
         try (
@@ -94,6 +96,8 @@ public class CanBoDao {
             return pstmt.executeUpdate() > 0;
             }
     }
+    
+    
     // Cập nhật thông tin
     public void update(String table, Canbo cb, String filed1, String filed2) throws SQLException, Exception {
         if (table.equalsIgnoreCase("tbl_kysu")) {
@@ -215,17 +219,17 @@ public class CanBoDao {
         return null;
     }
      
-     public Nhanvien getDetailNv(int macb) throws SQLException, Exception {
-        String sql = "SELECT * FROM tbl_canbo inner join tbl_nhanvien on macb = manv where macb = " + macb;
-        Nhanvien nv;
+     public Nhanvien getDetailcb(int macb) throws SQLException, Exception {
+        String sql = "SELECT * FROM tbl_canbo inner join tbl_nhacbien on macb = macb where macb = " + macb;
+        Nhanvien cb;
         try (
                 Connection con = DatabaseHelper.openConnection();
                 PreparedStatement pstmt = con.prepareStatement(sql);) {
             try (ResultSet rs = pstmt.executeQuery();) {
                 if (rs.next()) {
                     NhanVienDao dao = new NhanVienDao();
-                    nv = dao.getDetailNhanVien(macb);
-                    return nv;
+                    cb = dao.getDetailNhanVien(macb);
+                    return cb;
                 }
                 
             }
@@ -270,7 +274,7 @@ public class CanBoDao {
         }
         return null;
     }
-    //update cán b?
+    //update cán bộ
     public boolean update(String pw, int macb) throws SQLException, Exception {
         
         String sql = "update tbl_taikhoan SET password = ?"
@@ -299,6 +303,25 @@ public class CanBoDao {
             pstmt.setInt(2, macb);
 
             return true;
+        }
+    }
+    
+    // cập nhật thông tin cơ bản ở panel người dùng
+    public boolean update_general(Canbo cb) throws SQLException, Exception {
+        
+        String sql = "update tbl_canbo set tencb = ?, namsinh = ?, gioitinh = ?, diachi = ?"
+            + "where tbl_canbo.macb = ?";
+            
+        try (
+        Connection con = DatabaseHelper.openConnection();
+        PreparedStatement pstmt = con.prepareStatement(sql);) 
+        {
+            pstmt.setString(1, cb.getTencb());
+            pstmt.setInt(2, cb.getNamsinh());
+            pstmt.setString(3, cb.getGioitinh());
+            pstmt.setString(4, cb.getDiachi());
+            pstmt.setInt(5, cb.getMacb());
+            return pstmt.executeUpdate() > 0;
         }
     }
 }

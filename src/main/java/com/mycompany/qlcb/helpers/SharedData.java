@@ -13,3 +13,6 @@ import com.mycompany.qlcb.model.NguoiDung;
 public class SharedData {
     public static NguoiDung nguoiDangNhap;
 }
+
+
+

@@ -308,7 +308,15 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuManageEmployeeActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        try {
+            tplMainBoard.removeAll();
+            LoginDialog loginDialog = new LoginDialog(this, true);
+            loginDialog.setVisible(true);
+            processLogin();
 
+        } catch (Exception ex) {
+            Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void menuFile_ExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFile_ExitActionPerformed
@@ -411,6 +419,7 @@ public class MainForm extends javax.swing.JFrame {
             mnuManageWorker.setEnabled(false);
             mnuManageEmployee.setEnabled(false);
             mnuManageEngineer.setEnabled(false);
+            mnuSatistic.setEnabled(false);
             tbrQLNV.setEnabled(false);
             tbrQLKS.setEnabled(false);
             tbrQLCN.setEnabled(false);

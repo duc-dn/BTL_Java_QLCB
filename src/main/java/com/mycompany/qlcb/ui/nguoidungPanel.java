@@ -318,15 +318,15 @@ public class nguoidungPanel extends javax.swing.JPanel {
         }
         try {
             // Lấy dữ liệu từ trên form xuống
-            Nhanvien nv = new Nhanvien();
-            nv.setTencb(txtName.getText());
-            nv.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
-            nv.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
-            nv.setDiachi(txtAddress.getText());
-            nv.setMacb(Integer.parseInt(txtmanv.getText()));
-            NhanVienDao dao = new NhanVienDao();
-
-            if (dao.update(nv)) {
+            Canbo cb = new Canbo();
+            cb.setTencb(txtName.getText());
+            cb.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
+            cb.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
+            cb.setDiachi(txtAddress.getText());
+            cb.setMacb((SharedData.nguoiDangNhap.getMaCB()));
+            CanBoDao dao = new CanBoDao();
+            
+            if (dao.update_general(cb)) {
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được cập nhật thành công!!",
                         "Thông báo");
             } else {

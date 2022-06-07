@@ -16,8 +16,8 @@ import java.util.Collections;
  * @author Duc
  */
 public class NhanVienDao {
-    public ArrayList<Nhanvien> getAllNhanVien() throws SQLException, Exception {
-        String sql = "select * from tbl_canbo cb inner join tbl_nhanvien nv on cb.macb = nv.manv";
+    public ArrayList<Nhanvien> getAllNhanVien(String field, String type) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join tbl_nhanvien nv on cb.macb = nv.manv order by " + field + " " + type;
 
         try 
         (
@@ -115,5 +115,27 @@ public class NhanVienDao {
         }
     }
     
-   
+   public ArrayList<Nhanvien> sortEmployee(String filed, String type) throws SQLException, Exception {
+        
+        ArrayList<Nhanvien> list = null;
+        String sortType = "ASC";
+        String f = "tencb";
+        if (type.equalsIgnoreCase("Giảm dần")) sortType = "DESC";
+        else sortType = "ASC";
+        
+        if (filed.equalsIgnoreCase("Năm sinh")) {
+            f = "namsinh";
+        } 
+        else if (filed.equalsIgnoreCase("Giới tính")) {
+            f = "gioitinh";
+        }
+        else if (filed.equalsIgnoreCase("Địa chỉ")) {
+            f = "diachi";
+        }
+        else if (filed.equalsIgnoreCase("Công việc")) {
+            f = "congviec";
+        }
+        list = getAllNhanVien(f, sortType);
+        return list;
+    }
 }

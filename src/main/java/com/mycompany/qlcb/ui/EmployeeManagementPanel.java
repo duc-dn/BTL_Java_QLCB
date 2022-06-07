@@ -4,8 +4,12 @@ import com.mycompany.qlcb.dao.CanBoDao;
 import com.mycompany.qlcb.dao.NhanVienDao;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
+import com.mycompany.qlcb.helpers.VNCharacterUtils;
 import com.mycompany.qlcb.model.Nhanvien;
 import java.util.ArrayList;
+import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,7 +18,9 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     
     private MainForm parentForm;
     private DefaultTableModel tblModel;
-    
+    ArrayList<Nhanvien> list;
+    String fieldSort = "tencb";
+    String sortType = "ASC";
     
     public EmployeeManagementPanel() {
         initComponents();
@@ -34,7 +40,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     private void loadDataToTable() {
         try {
             NhanVienDao dao = new NhanVienDao();
-            ArrayList<Nhanvien> list = dao.getAllNhanVien();
+            ArrayList<Nhanvien> list = dao.getAllNhanVien(null, "");
             tblModel.setRowCount(0);
             for (Nhanvien it:list) {
                 tblModel.addRow(new Object[] {
@@ -85,6 +91,9 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         txtSearch = new javax.swing.JTextField();
         btnSeach = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        cbField = new javax.swing.JComboBox<>();
+        cbSort = new javax.swing.JComboBox<>();
+        btnSort = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
@@ -210,6 +219,27 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel6.setText("Thông tin tìm kiếm");
 
+        cbField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Họ tên", "Năm sinh", "Giới tính", "Địa chỉ", "Công việc" }));
+        cbField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFieldActionPerformed(evt);
+            }
+        });
+
+        cbSort.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tăng dần", "Giảm dần", " " }));
+        cbSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSortActionPerformed(evt);
+            }
+        });
+
+        btnSort.setText("Sắp xếp");
+        btnSort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSortActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -244,25 +274,23 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                             .addComponent(jSeparator3)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
                                 .addComponent(jLabel4)
                                 .addGap(73, 73, 73)
                                 .addComponent(rdNam)
                                 .addGap(79, 79, 79)
-                                .addComponent(rdNu))
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jLabel6)
-                                .addGap(28, 28, 28)
-                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
-                                .addComponent(btnSeach)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addComponent(rdNu)))
+                        .addGap(0, 362, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6)
+                        .addGap(28, 28, 28)
+                        .addComponent(txtSearch)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSeach)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(139, 139, 139)
@@ -274,6 +302,14 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
                 .addComponent(btnDelete)
                 .addGap(21, 21, 21))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnSort)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -323,17 +359,20 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                         .addComponent(btnDelete)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(4, 4, 4)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnSeach)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6))))
+                    .addComponent(btnSeach, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSort))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -362,6 +401,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         rdNu.setSelected(false);
     }//GEN-LAST:event_btnNewActionPerformed
     
+    
+    // Sự kiện save
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         StringBuilder sb = new StringBuilder();
         DataValidator.validateEmpty(txtName, sb, "Tên Công nhân không được để trống!!");
@@ -408,6 +449,16 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
                 SatisticManagementPanel sasPanel = new SatisticManagementPanel();
                 sasPanel.loadDataToTable1();
+                
+                //tao tai khoan tu dong
+                String tk = VNCharacterUtils.removeAccent(txtName.getText()).replace(" ", "").toLowerCase();
+                System.out.print(tk);
+                Random rand = new Random();
+                String mk = String.valueOf(rand.nextInt(100000000));
+                if(dao.insertTaiKhoan(tk, mk, macb, Integer.valueOf(txtMaNghe.getText()))){
+                    MessageDialogHelper.showMessageDialog(parentForm, "Tạo tài khoản thành công!\nTài khoản: "+tk+"\nMật khẩu: "+mk,
+                "Thông báo");
+                }
                 loadDataToTable();
             }
             
@@ -548,13 +599,45 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSeachActionPerformed
 
+    private void cbFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFieldActionPerformed
+        String txt = (String)cbField.getSelectedItem();
+        fieldSort = txt;
+    }//GEN-LAST:event_cbFieldActionPerformed
+
+    private void cbSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortActionPerformed
+        String type = (String)cbSort.getSelectedItem();
+        sortType = type;
+    }//GEN-LAST:event_cbSortActionPerformed
+
+    private void btnSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortActionPerformed
+        NhanVienDao dao = new NhanVienDao();
+        ArrayList<Nhanvien> listt;
+        try {
+            listt = dao.sortEmployee(fieldSort, sortType);
+            for (Nhanvien it:listt) {
+                tblModel.addRow(new Object[] {
+                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(),
+                    it.getDiachi(), it.getCongviec()
+                });
+            }
+            tblModel.fireTableDataChanged();
+            tblEmployee.setModel(tblModel);
+            tblModel.setRowCount(0);
+        } catch (Exception ex) {
+            Logger.getLogger(EngineerManagementPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnSortActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSeach;
+    private javax.swing.JButton btnSort;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JComboBox<String> cbField;
+    private javax.swing.JComboBox<String> cbSort;
     private javax.swing.ButtonGroup genderGroup;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

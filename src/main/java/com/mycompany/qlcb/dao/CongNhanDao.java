@@ -10,8 +10,8 @@ import java.util.ArrayList;
 
 
 public class CongNhanDao {
-    public ArrayList<Congnhan> getAllCongNhan() throws SQLException, Exception {
-        String sql = "select * from tbl_canbo cb inner join tbl_congnhan cn on cb.macb = cn.macn";
+    public ArrayList<Congnhan> getAllCongNhan(String field, String type) throws SQLException, Exception {
+        String sql = "select * from tbl_canbo cb inner join tbl_congnhan cn on cb.macb = cn.macn order by " + field + " " + type;
 
         try 
         (
@@ -105,5 +105,30 @@ public class CongNhanDao {
             pstmt.setInt(6, cn.getMacb());
             return pstmt.executeUpdate() > 0;
         }
+    }
+    
+    public ArrayList<Congnhan> sortWorker(String filed, String type) throws SQLException, Exception {
+        
+        ArrayList<Congnhan> list = null;
+        String sortType = "ASC";
+        String f = "tencb";
+        if (type.equalsIgnoreCase("Giảm dần")) sortType = "DESC";
+        else sortType = "ASC";
+        
+        if (filed.equalsIgnoreCase("Năm sinh")) {
+            f = "namsinh";
+        } 
+        else if (filed.equalsIgnoreCase("Giới tính")) {
+            f = "gioitinh";
+        }
+        else if (filed.equalsIgnoreCase("Địa chỉ")) {
+            f = "diachi";
+        }
+        else if (filed.equalsIgnoreCase("Bậc")) {
+            f = "bac";
+        }
+        
+        list = getAllCongNhan(f, sortType);
+        return list;
     }
 }
