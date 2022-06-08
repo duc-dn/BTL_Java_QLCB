@@ -3,13 +3,9 @@ package com.mycompany.qlcb.helpers;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import javax.swing.JOptionPane;
 
 
-/**
- *
- * @author Duc
- */
+
 public class DatabaseHelper {
     public static Connection openConnection() throws Exception{
         Class.forName("com.mysql.jdbc.Driver");  

@@ -12,6 +12,11 @@ import com.mycompany.qlcb.model.NguoiDung;
  */
 public class SharedData {
     public static NguoiDung nguoiDangNhap;
+    public static String tenNguoiDung;
+    public void show_info() {
+        System.out.println(nguoiDangNhap.getTenDangNhap());
+        System.out.println(nguoiDangNhap.getVaiTro());
+    }
 }
 
 

@@ -3,7 +3,6 @@ package com.mycompany.qlcb.ui;
 import com.mycompany.qlcb.helpers.SharedData;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 public class MainForm extends javax.swing.JFrame {
@@ -304,6 +303,9 @@ public class MainForm extends javax.swing.JFrame {
             mEmployeePanel = new EmployeeManagementPanel();
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
         }
+        else {
+            tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
+        }
         tplMainBoard.setSelectedComponent(mSatisticPanel);
     }//GEN-LAST:event_mnuManageEmployeeActionPerformed
 
@@ -330,6 +332,9 @@ public class MainForm extends javax.swing.JFrame {
 
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
+        else {
+            tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
+        }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
     }//GEN-LAST:event_mnuManageWorkerActionPerformed
 
@@ -343,10 +348,15 @@ public class MainForm extends javax.swing.JFrame {
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    
+    // Quản lý công nhân
     private void tbrQLCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLCNActionPerformed
         if (mWorkerPanel == null) {
             mWorkerPanel = new WorkerManagementPanel();
 
+            tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
+        }
+        else {
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
@@ -359,6 +369,9 @@ public class MainForm extends javax.swing.JFrame {
 
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
         }
+        else {
+            tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
+        }
         tplMainBoard.setSelectedComponent(mEngineerPanel);
     }//GEN-LAST:event_mnuManageEngineerActionPerformed
 
@@ -368,12 +381,18 @@ public class MainForm extends javax.swing.JFrame {
 
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
         }
+        else {
+            tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
+        }
         tplMainBoard.setSelectedComponent(mEngineerPanel);
     }//GEN-LAST:event_tbrQLKSActionPerformed
 
     private void tbrQLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLNVActionPerformed
         if (mEmployeePanel == null) {
             mEmployeePanel = new EmployeeManagementPanel();
+            tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
+        }
+        else {
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
         }
         tplMainBoard.setSelectedComponent(mEmployeePanel);
@@ -385,8 +404,8 @@ public class MainForm extends javax.swing.JFrame {
             tplMainBoard.removeAll();
             LoginDialog loginDialog = new LoginDialog(this, true);
             loginDialog.setVisible(true);
-            processLogin();
             
+            processLogin();
         } catch (Exception ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -415,7 +434,10 @@ public class MainForm extends javax.swing.JFrame {
     private void processLogin() throws Exception {
         txtTen.setText(SharedData.nguoiDangNhap.getTenDangNhap());
         txtQuyen.setText(SharedData.nguoiDangNhap.getVaiTro());
+
         if (!SharedData.nguoiDangNhap.getVaiTro().equals("Quản trị viên")) {
+            SharedData a = new SharedData();
+            a.show_info();
             mnuManageWorker.setEnabled(false);
             mnuManageEmployee.setEnabled(false);
             mnuManageEngineer.setEnabled(false);
@@ -425,24 +447,33 @@ public class MainForm extends javax.swing.JFrame {
             tbrQLCN.setEnabled(false);
             if (mNguoiDungPanel == null) {
                 mNguoiDungPanel = new nguoidungPanel();
-
                 tplMainBoard.addTab("Thông tin cá nhân", mNguoiDungPanel);
+                tplMainBoard.setSelectedComponent(mNguoiDungPanel);
             }
-            tplMainBoard.setSelectedComponent(mNguoiDungPanel);
-
+            else {
+                tplMainBoard.addTab("Thông tin cá nhân", mNguoiDungPanel);
+                tplMainBoard.setSelectedComponent(mNguoiDungPanel);
+            }
+            
         } else {
+            if (tplMainBoard == null) {
+                tplMainBoard.setSelectedComponent(mEmployeePanel);
+                tplMainBoard.setSelectedComponent(mEngineerPanel);
+                tplMainBoard.setSelectedComponent(mWorkerPanel);
+            }
+            SharedData a = new SharedData();
+            a.show_info();
             mnuManageWorker.setEnabled(true);
             mnuManageEmployee.setEnabled(true);
             mnuManageEngineer.setEnabled(true);
+            mnuSatistic.setEnabled(true);
             tbrQLNV.setEnabled(true);
             tbrQLKS.setEnabled(true);
             tbrQLCN.setEnabled(true);
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

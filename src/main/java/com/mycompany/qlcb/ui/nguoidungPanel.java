@@ -66,12 +66,12 @@ public class nguoidungPanel extends javax.swing.JPanel {
         txtmanv = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtPasOld = new javax.swing.JTextField();
-        txtPasNew = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        txtRePw = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         btnChangePw = new javax.swing.JButton();
+        txtPasOld = new javax.swing.JPasswordField();
+        txtPasNew = new javax.swing.JPasswordField();
+        txtRePw = new javax.swing.JPasswordField();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
@@ -133,29 +133,8 @@ public class nguoidungPanel extends javax.swing.JPanel {
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel9.setText("Mật khẩu cũ:");
 
-        txtPasOld.setPreferredSize(new java.awt.Dimension(9, 22));
-        txtPasOld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasOldActionPerformed(evt);
-            }
-        });
-
-        txtPasNew.setPreferredSize(new java.awt.Dimension(9, 22));
-        txtPasNew.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPasNewActionPerformed(evt);
-            }
-        });
-
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Mật khẩu mới:");
-
-        txtRePw.setPreferredSize(new java.awt.Dimension(9, 22));
-        txtRePw.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtRePwActionPerformed(evt);
-            }
-        });
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel11.setText("Nhập lại mật khẩu:");
@@ -182,7 +161,7 @@ public class nguoidungPanel extends javax.swing.JPanel {
                         .addComponent(rdNam)
                         .addGap(79, 79, 79)
                         .addComponent(rdNu)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(385, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -213,17 +192,17 @@ public class nguoidungPanel extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel9)
                                     .addComponent(jLabel10))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txtPasNew, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-                                    .addComponent(txtPasOld, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGap(39, 39, 39)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPasOld)
+                                    .addComponent(txtPasNew)))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(0, 0, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                                .addComponent(txtRePw, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGap(12, 12, 12)
+                                .addComponent(txtRePw))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnUpdate))
@@ -272,19 +251,19 @@ public class nguoidungPanel extends javax.swing.JPanel {
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPasOld, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
+                    .addComponent(jLabel9)
+                    .addComponent(txtPasOld, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPasNew, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtPasNew, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
                     .addComponent(txtRePw, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnChangePw)
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -339,18 +318,6 @@ public class nguoidungPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void txtPasOldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasOldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasOldActionPerformed
-
-    private void txtPasNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPasNewActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtPasNewActionPerformed
-
-    private void txtRePwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRePwActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtRePwActionPerformed
-
     private void btnChangePwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePwActionPerformed
         StringBuilder sb = new StringBuilder();
         DataValidator.validateEmpty(txtPasOld, sb, "Bạn cần nhập mật khẩu hiện tại!!");
@@ -370,9 +337,9 @@ public class nguoidungPanel extends javax.swing.JPanel {
         try {
             // Lấy dữ liệu từ trên form xuống
             CanBoDao dao = new CanBoDao();
-            if (dao.checkPw(txtPasOld.getText(), macb)) {
-                if (txtPasNew.getText().equals(txtRePw.getText())) {
-                    if (dao.update(txtPasNew.getText(), macb)) {
+            if (dao.checkPw(new String(txtPasOld.getPassword()), macb)) {
+                if (new String(txtPasNew.getPassword()).equals(new String(txtRePw.getPassword()))) {
+                    if (dao.update(new String(txtPasNew.getPassword()), macb)) {
                         MessageDialogHelper.showMessageDialog(parentForm, "Đổi mật khẩu thành công!!", "Thông báo");
                     } else {
                         MessageDialogHelper.showConfirmDialog(parentForm, "Đổi mật khẩu lỗi", "Cảnh báo");
@@ -415,9 +382,9 @@ public class nguoidungPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtMaNghe;
     private javax.swing.JTextField txtNamSinh;
     private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtPasNew;
-    private javax.swing.JTextField txtPasOld;
-    private javax.swing.JTextField txtRePw;
+    private javax.swing.JPasswordField txtPasNew;
+    private javax.swing.JPasswordField txtPasOld;
+    private javax.swing.JPasswordField txtRePw;
     private javax.swing.JTextField txtmanv;
     // End of variables declaration//GEN-END:variables
 }
