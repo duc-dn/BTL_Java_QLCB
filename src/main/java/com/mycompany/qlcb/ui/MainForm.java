@@ -151,18 +151,22 @@ public class MainForm extends javax.swing.JFrame {
         txtTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
+        txtQuyen.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         txtQuyen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                    .addComponent(txtQuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(54, 54, 54))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -432,7 +436,7 @@ public class MainForm extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuSatisticActionPerformed
 
     private void processLogin() throws Exception {
-        txtTen.setText(SharedData.nguoiDangNhap.getTenDangNhap());
+        txtTen.setText(SharedData.tenNguoiDung);
         txtQuyen.setText(SharedData.nguoiDangNhap.getVaiTro());
 
         if (!SharedData.nguoiDangNhap.getVaiTro().equals("Quản trị viên")) {
