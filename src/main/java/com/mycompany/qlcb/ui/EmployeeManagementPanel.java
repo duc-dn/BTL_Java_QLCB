@@ -612,6 +612,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     private void btnSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortActionPerformed
         NhanVienDao dao = new NhanVienDao();
         ArrayList<Nhanvien> listt;
+        tblModel.setRowCount(0);
         try {
             listt = dao.sortEmployee(fieldSort, sortType);
             for (Nhanvien it:listt) {
@@ -622,7 +623,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             }
             tblModel.fireTableDataChanged();
             tblEmployee.setModel(tblModel);
-            tblModel.setRowCount(0);
+            
         } catch (Exception ex) {
             Logger.getLogger(EngineerManagementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
