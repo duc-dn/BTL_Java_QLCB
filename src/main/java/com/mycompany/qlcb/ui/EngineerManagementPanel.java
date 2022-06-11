@@ -2,6 +2,7 @@ package com.mycompany.qlcb.ui;
 
 import com.mycompany.qlcb.dao.CanBoDao;
 import com.mycompany.qlcb.dao.KySuDao;
+import com.mycompany.qlcb.filehelpers.ExportBase;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
 import com.mycompany.qlcb.helpers.VNCharacterUtils;
@@ -94,6 +95,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         cbSort = new javax.swing.JComboBox<>();
         btnSort = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("QUẢN LÝ KỸ SƯ");
@@ -263,6 +265,13 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        btnExport.setText("Xuất file");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -329,10 +338,12 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                                 .addComponent(txtMaNghe, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGap(18, 18, 18)
                                 .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSort)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnSort)))
+                                .addComponent(btnExport)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtmaks, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -424,9 +435,10 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnSort)
                         .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExport))
                     .addComponent(txtMaNghe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -704,10 +716,28 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        try {
+            KySuDao dao = new KySuDao();
+            list = dao.getAllKysu(null, "");
+
+            if (list.size() > 0) {
+                ExportBase export = new ExportBase();
+                export.KySuExport(list);
+
+                MessageDialogHelper.showMessageDialog(parentForm, "Xuất file thành công", "Thông báo");
+            }
+
+        } catch (Exception ex) {
+            MessageDialogHelper.showErrorDialog(parentForm, ex.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_btnExportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSort;

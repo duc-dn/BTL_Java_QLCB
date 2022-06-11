@@ -183,6 +183,23 @@ public class CanBoDao {
         }
     }
     
+    public int[] getNumber() throws SQLException, Exception {
+        String sql = "SELECT count(macb) as 'soluong' FROM tbl_canbo group by manghe";
+        int[] arr = new int[3];
+        try (
+                Connection con = DatabaseHelper.openConnection();
+                PreparedStatement pstmt = con.prepareStatement(sql);) {
+            try (ResultSet rs = pstmt.executeQuery();) {
+                int i = 0;
+                while (rs.next()) {
+                    arr[i] = rs.getInt("soluong");
+                    i++;
+                }
+                
+            }
+            return arr;
+        }     
+    }
     public Congnhan getDetailCn(int macb) throws SQLException, Exception {
         String sql = "SELECT * FROM tbl_canbo inner join tbl_congnhan on macb = macn where macb = " + macb;
         Congnhan cn;

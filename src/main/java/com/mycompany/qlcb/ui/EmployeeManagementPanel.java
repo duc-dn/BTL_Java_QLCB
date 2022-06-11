@@ -4,7 +4,7 @@ import com.mycompany.qlcb.dao.CanBoDao;
 import com.mycompany.qlcb.dao.NhanVienDao;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
-import com.mycompany.qlcb.filehelpers.ExportNhanVien;
+import com.mycompany.qlcb.filehelpers.ExportBase;
 import com.mycompany.qlcb.helpers.VNCharacterUtils;
 import com.mycompany.qlcb.model.Nhanvien;
 import java.util.ArrayList;
@@ -674,8 +674,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             ArrayList<Nhanvien> list = dao.getAllNhanVien(null, "");
             
             if (list.size() > 0) {
-                ExportNhanVien nv = new ExportNhanVien();
-                nv.Export(list);
+                ExportBase export = new ExportBase();
+                export.NhanVienExport(list);
                 
                 MessageDialogHelper.showMessageDialog(parentForm, "Xuất file thành công", "Thông báo");
             }
