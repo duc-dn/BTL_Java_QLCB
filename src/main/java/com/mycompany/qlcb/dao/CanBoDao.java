@@ -275,7 +275,7 @@ public class CanBoDao {
         return null;
     }
     //update cán bộ
-    public boolean update(String pw, int macb) throws SQLException, Exception {
+    public boolean chagePassword(String pw, int macb) throws SQLException, Exception {
         
         String sql = "update tbl_taikhoan SET password = ?"
             + "where tbl_taikhoan.macb = ?";
@@ -324,4 +324,6 @@ public class CanBoDao {
             return pstmt.executeUpdate() > 0;
         }
     }
+    
+    
 }

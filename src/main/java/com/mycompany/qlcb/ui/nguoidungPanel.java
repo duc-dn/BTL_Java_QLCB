@@ -339,7 +339,7 @@ public class nguoidungPanel extends javax.swing.JPanel {
             CanBoDao dao = new CanBoDao();
             if (dao.checkPw(new String(txtPasOld.getPassword()), macb)) {
                 if (new String(txtPasNew.getPassword()).equals(new String(txtRePw.getPassword()))) {
-                    if (dao.update(new String(txtPasNew.getPassword()), macb)) {
+                    if (dao.chagePassword(new String(txtPasNew.getPassword()), macb)) {
                         MessageDialogHelper.showMessageDialog(parentForm, "Đổi mật khẩu thành công!!", "Thông báo");
                     } else {
                         MessageDialogHelper.showConfirmDialog(parentForm, "Đổi mật khẩu lỗi", "Cảnh báo");

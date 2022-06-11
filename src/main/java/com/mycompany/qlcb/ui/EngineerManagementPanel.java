@@ -93,6 +93,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         cbField = new javax.swing.JComboBox<>();
         cbSort = new javax.swing.JComboBox<>();
         btnSort = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("QUẢN LÝ KỸ SƯ");
@@ -255,6 +256,13 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Reset mật khẩu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -315,7 +323,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                         .addComponent(btnSearch))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 737, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(txtMaNghe, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -337,14 +345,16 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jSeparator3)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 124, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnAdd)
-                        .addGap(109, 109, 109)
+                        .addGap(18, 18, 18)
                         .addComponent(btnSave)
-                        .addGap(81, 81, 81)
+                        .addGap(18, 18, 18)
                         .addComponent(btnUpdate)
-                        .addGap(92, 92, 92)
-                        .addComponent(btnDelete)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
@@ -394,7 +404,8 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                     .addComponent(btnSave)
                     .addComponent(btnAdd)
                     .addComponent(btnUpdate)
-                    .addComponent(btnDelete))
+                    .addComponent(btnDelete)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -678,6 +689,21 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnSortActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int manv = Integer.parseInt(txtmaks.getText());
+        Random rand = new Random();
+        String mk = String.valueOf(rand.nextInt(100000000));
+        CanBoDao dao = new CanBoDao();
+        try {
+            if (dao.chagePassword(mk, manv)) {
+                MessageDialogHelper.showMessageDialog(parentForm, "Reset mật khẩu thành công!!\nMật khẩu mới: " + mk , "Thông báo");
+            }
+
+        } catch (Exception ex) {
+            MessageDialogHelper.showErrorDialog(parentForm, ex.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
@@ -689,6 +715,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbField;
     private javax.swing.JComboBox<String> cbSort;
     private javax.swing.ButtonGroup genderGroup;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel3;

@@ -4,6 +4,7 @@ import com.mycompany.qlcb.dao.CanBoDao;
 import com.mycompany.qlcb.dao.NhanVienDao;
 import com.mycompany.qlcb.helpers.DataValidator;
 import com.mycompany.qlcb.helpers.MessageDialogHelper;
+import com.mycompany.qlcb.filehelpers.ExportNhanVien;
 import com.mycompany.qlcb.helpers.VNCharacterUtils;
 import com.mycompany.qlcb.model.Nhanvien;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.ss.formula.functions.Count;
 
 
 public class EmployeeManagementPanel extends javax.swing.JPanel {
@@ -94,6 +96,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         cbField = new javax.swing.JComboBox<>();
         cbSort = new javax.swing.JComboBox<>();
         btnSort = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel1.setText("QUẢN LÝ NHÂN VIÊN");
@@ -240,6 +244,20 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             }
         });
 
+        jButton1.setText("Reset mật khẩu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnExport.setText("Xuất file");
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -272,7 +290,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                             .addComponent(jSeparator1)
                             .addComponent(jSeparator2)
                             .addComponent(jSeparator3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 671, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -283,32 +301,35 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                                 .addComponent(rdNam)
                                 .addGap(79, 79, 79)
                                 .addComponent(rdNu)))
-                        .addGap(0, 362, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel6)
                         .addGap(28, 28, 28)
                         .addComponent(txtSearch)
                         .addGap(18, 18, 18)
-                        .addComponent(btnSeach)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(139, 139, 139)
-                .addComponent(btnNew)
-                .addGap(50, 50, 50)
-                .addComponent(btnSave)
-                .addGap(58, 58, 58)
-                .addComponent(btnUpdate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addComponent(btnDelete)
-                .addGap(21, 21, 21))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSort)
+                        .addComponent(btnSeach))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnNew)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSave)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnUpdate)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton1))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSort)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExport)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -350,13 +371,12 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(13, 13, 13)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnSave)
-                        .addComponent(btnNew))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(btnUpdate)
-                        .addComponent(btnDelete)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSave)
+                    .addComponent(btnNew)
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDelete)
+                    .addComponent(jButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(5, 5, 5)
@@ -371,7 +391,8 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSort))
+                    .addComponent(btnSort)
+                    .addComponent(btnExport))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -629,9 +650,45 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_btnSortActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        int manv = Integer.parseInt(txtmanv.getText());
+        Random rand = new Random();
+        String mk = String.valueOf(rand.nextInt(100000000));
+        CanBoDao dao = new CanBoDao();
+        try {
+            System.out.println("alo dmm1");
+            if (dao.chagePassword(mk, manv)) {
+                
+                System.out.println("alo dmm2");
+                MessageDialogHelper.showMessageDialog(parentForm, "Reset mật khẩu thành công!!\nMật khẩu mới: " + mk , "Thông báo");
+            }
+            
+        } catch (Exception ex) {
+            MessageDialogHelper.showErrorDialog(parentForm, ex.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        try {
+            NhanVienDao dao = new NhanVienDao();
+            ArrayList<Nhanvien> list = dao.getAllNhanVien(null, "");
+            
+            if (list.size() > 0) {
+                ExportNhanVien nv = new ExportNhanVien();
+                nv.Export(list);
+                
+                MessageDialogHelper.showMessageDialog(parentForm, "Xuất file thành công", "Thông báo");
+            }
+            
+        } catch (Exception ex) {
+            MessageDialogHelper.showErrorDialog(parentForm, ex.getMessage(), "Lỗi");
+        }
+    }//GEN-LAST:event_btnExportActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSeach;
@@ -640,6 +697,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> cbField;
     private javax.swing.JComboBox<String> cbSort;
     private javax.swing.ButtonGroup genderGroup;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -666,4 +724,5 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     private javax.swing.JTextField txtSearch;
     private javax.swing.JTextField txtmanv;
     // End of variables declaration//GEN-END:variables
+
 }
