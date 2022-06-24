@@ -12,6 +12,7 @@ public class MainForm extends javax.swing.JFrame {
     private EmployeeManagementPanel mEmployeePanel;
     private SatisticManagementPanel mSatisticPanel;
     private nguoidungPanel mNguoiDungPanel;
+    private AccountManagementPanel mAccountPanel;
 
     public MainForm() {
         initComponents();
@@ -44,12 +45,17 @@ public class MainForm extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JToolBar.Separator();
         tbrQLNV = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
+        tbrQLTK = new javax.swing.JButton();
+        jSeparator13 = new javax.swing.JToolBar.Separator();
+        tbrSatistic = new javax.swing.JButton();
+        jSeparator14 = new javax.swing.JToolBar.Separator();
         tbrAboutUs = new javax.swing.JButton();
-        jSeparator10 = new javax.swing.JToolBar.Separator();
         tplMainBoard = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         txtTen = new javax.swing.JLabel();
         txtQuyen = new javax.swing.JLabel();
+        jSeparator12 = new javax.swing.JSeparator();
+        jSeparator10 = new javax.swing.JToolBar.Separator();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -61,6 +67,8 @@ public class MainForm extends javax.swing.JFrame {
         mnuManageEngineer = new javax.swing.JMenuItem();
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         mnuManageEmployee = new javax.swing.JMenuItem();
+        jSeparator11 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnuSatistic = new javax.swing.JMenuItem();
         mnuAboutUs = new javax.swing.JMenu();
@@ -135,6 +143,32 @@ public class MainForm extends javax.swing.JFrame {
         jToolBar1.add(tbrQLNV);
         jToolBar1.add(jSeparator2);
 
+        tbrQLTK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/gpa-icon-32.png"))); // NOI18N
+        tbrQLTK.setText("QL Tài Khoản");
+        tbrQLTK.setFocusable(false);
+        tbrQLTK.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbrQLTK.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbrQLTK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbrQLTKActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(tbrQLTK);
+        jToolBar1.add(jSeparator13);
+
+        tbrSatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-view-choose-icon-24.png"))); // NOI18N
+        tbrSatistic.setText("Thống kê");
+        tbrSatistic.setFocusable(false);
+        tbrSatistic.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        tbrSatistic.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        tbrSatistic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tbrSatisticActionPerformed(evt);
+            }
+        });
+        jToolBar1.add(tbrSatistic);
+        jToolBar1.add(jSeparator14);
+
         tbrAboutUs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/mycompany/qlcb/icons/Actions-help-about-icon-32.png"))); // NOI18N
         tbrAboutUs.setText("Giới thiệu");
         tbrAboutUs.setFocusable(false);
@@ -146,7 +180,6 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jToolBar1.add(tbrAboutUs);
-        jToolBar1.add(jSeparator10);
 
         txtTen.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         txtTen.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -157,20 +190,24 @@ public class MainForm extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTen, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
-                    .addComponent(txtQuyen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(54, 54, 54))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(72, 72, 72)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator12, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(txtTen, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(txtQuyen, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jMenu1.setText("Hệ thống");
@@ -231,6 +268,11 @@ public class MainForm extends javax.swing.JFrame {
             }
         });
         jMenu2.add(mnuManageEmployee);
+        jMenu2.add(jSeparator11);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        jMenuItem2.setText("Quản lý tài khoản");
+        jMenu2.add(jMenuItem2);
 
         jMenuBar1.add(jMenu2);
 
@@ -272,26 +314,22 @@ public class MainForm extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(72, 72, 72)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addComponent(tplMainBoard)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 543, Short.MAX_VALUE)
+                    .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(0, 0, 0)
+                .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -338,10 +376,13 @@ public class MainForm extends javax.swing.JFrame {
         tplMainBoard.setSelectedComponent(mWorkerPanel);
     }//GEN-LAST:event_mnuManageWorkerActionPerformed
 
-    private void tbrAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrAboutUsActionPerformed
-        AboutUsDialog aboutDialog = new AboutUsDialog(this, true);
-        aboutDialog.setVisible(true);
-    }//GEN-LAST:event_tbrAboutUsActionPerformed
+    private void tbrSatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrSatisticActionPerformed
+        if (mSatisticPanel == null) {
+            mSatisticPanel = new SatisticManagementPanel();
+            tplMainBoard.addTab("Thống kê và tìm kiếm", mSatisticPanel);
+        }
+        tplMainBoard.setSelectedComponent(mSatisticPanel);
+    }//GEN-LAST:event_tbrSatisticActionPerformed
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         AboutUsDialog aboutDialog = new AboutUsDialog(this, true);
@@ -431,6 +472,19 @@ public class MainForm extends javax.swing.JFrame {
         tplMainBoard.setSelectedComponent(mSatisticPanel);
     }//GEN-LAST:event_mnuSatisticActionPerformed
 
+    private void tbrAboutUsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrAboutUsActionPerformed
+        AboutUsDialog aboutDialog = new AboutUsDialog(this, true);
+        aboutDialog.setVisible(true);
+    }//GEN-LAST:event_tbrAboutUsActionPerformed
+
+    private void tbrQLTKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLTKActionPerformed
+        if (mAccountPanel == null) {
+            mAccountPanel = new AccountManagementPanel();
+            tplMainBoard.addTab("Quản lý tài khoản", mAccountPanel);
+        }
+        tplMainBoard.setSelectedComponent(mAccountPanel);
+    }//GEN-LAST:event_tbrQLTKActionPerformed
+
     private void processLogin() throws Exception {
         txtTen.setText(SharedData.nguoiDangNhap.getTenDangNhap());
         txtQuyen.setText(SharedData.nguoiDangNhap.getVaiTro());
@@ -513,6 +567,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
@@ -520,6 +575,10 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator10;
+    private javax.swing.JPopupMenu.Separator jSeparator11;
+    private javax.swing.JSeparator jSeparator12;
+    private javax.swing.JToolBar.Separator jSeparator13;
+    private javax.swing.JToolBar.Separator jSeparator14;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
@@ -540,6 +599,8 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JButton tbrQLCN;
     private javax.swing.JButton tbrQLKS;
     private javax.swing.JButton tbrQLNV;
+    private javax.swing.JButton tbrQLTK;
+    private javax.swing.JButton tbrSatistic;
     private javax.swing.JTabbedPane tplMainBoard;
     private javax.swing.JLabel txtQuyen;
     private javax.swing.JLabel txtTen;
