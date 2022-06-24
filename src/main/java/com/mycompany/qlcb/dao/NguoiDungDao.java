@@ -33,7 +33,7 @@ public class NguoiDungDao {
                     if(quyen == 2){
                         nd.setVaiTro("Kỹ sư");
                     }
-                    if(quyen == 2){
+                    if(quyen == 3){
                         nd.setVaiTro("Nhân viên");
                     }
                     return nd;

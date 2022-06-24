@@ -40,7 +40,7 @@ public class CongNhanDao {
         String sql = "select * from tbl_canbo cb inner join "
                 + "tbl_congnhan cn on cb.macb = cn.macn "
                 + "where tencb like" + info + " or namsinh like" + info + " or gioitinh like " + info
-                + " or diachi like " + info + "or bac like " + info;
+                + " or diachi like " + info + "or bac like " + info + " or macb like " + info;
 
         try 
         (

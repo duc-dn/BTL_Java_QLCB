@@ -50,7 +50,8 @@ public class KySuDao {
         String sql = "select * from tbl_canbo cb inner join "
                 + "tbl_kysu ks on cb.macb = ks.maks "
                 + "where tencb like" + info + " or namsinh like" + info + " or gioitinh like " + info
-                + " or diachi like " + info + "or nganhdt like " + info + " or loaibang like " + info;
+                + " or diachi like " + info + "or nganhdt like " + info + " or loaibang like " + info +
+                " or macb like " + info;
 
         try 
         (

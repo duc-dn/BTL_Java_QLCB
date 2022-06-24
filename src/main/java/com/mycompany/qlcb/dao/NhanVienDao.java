@@ -47,7 +47,7 @@ public class NhanVienDao {
         String sql = "select * from tbl_canbo cb inner join "
                 + "tbl_nhanvien nv on cb.macb = nv.manv "
                 + "where tencb like" + info + " or namsinh like" + info + " or gioitinh like " + info
-                + " or diachi like " + info + "or congviec like " + info;
+                + " or diachi like " + info + "or congviec like " + info + " or macb like " + info;
 
         try 
         (

@@ -375,7 +375,7 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel4))
                             .addComponent(rdNam)
                             .addComponent(rdNu))
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
@@ -400,10 +400,10 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                             .addComponent(btnDelete)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnExport)
-                .addGap(18, 18, 18))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 

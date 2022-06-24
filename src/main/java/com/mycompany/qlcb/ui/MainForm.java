@@ -68,7 +68,7 @@ public class MainForm extends javax.swing.JFrame {
         jSeparator7 = new javax.swing.JPopupMenu.Separator();
         mnuManageEmployee = new javax.swing.JMenuItem();
         jSeparator11 = new javax.swing.JPopupMenu.Separator();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnuQLTK = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         mnuSatistic = new javax.swing.JMenuItem();
         mnuAboutUs = new javax.swing.JMenu();
@@ -270,9 +270,9 @@ public class MainForm extends javax.swing.JFrame {
         jMenu2.add(mnuManageEmployee);
         jMenu2.add(jSeparator11);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
-        jMenuItem2.setText("Quản lý tài khoản");
-        jMenu2.add(jMenuItem2);
+        mnuQLTK.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        mnuQLTK.setText("Quản lý tài khoản");
+        jMenu2.add(mnuQLTK);
 
         jMenuBar1.add(jMenu2);
 
@@ -327,7 +327,7 @@ public class MainForm extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, Short.MAX_VALUE))
                 .addGap(0, 0, 0)
                 .addComponent(tplMainBoard, javax.swing.GroupLayout.DEFAULT_SIZE, 323, Short.MAX_VALUE)
                 .addContainerGap())
@@ -340,8 +340,7 @@ public class MainForm extends javax.swing.JFrame {
         if (mEmployeePanel == null) {
             mEmployeePanel = new EmployeeManagementPanel();
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
-        }
-        else {
+        } else {
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
         }
         tplMainBoard.setSelectedComponent(mSatisticPanel);
@@ -369,8 +368,7 @@ public class MainForm extends javax.swing.JFrame {
             mWorkerPanel = new WorkerManagementPanel();
 
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
-        }
-        else {
+        } else {
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
@@ -381,6 +379,9 @@ public class MainForm extends javax.swing.JFrame {
             mSatisticPanel = new SatisticManagementPanel();
             tplMainBoard.addTab("Thống kê và tìm kiếm", mSatisticPanel);
         }
+        else {
+            tplMainBoard.addTab("Thống kê và tìm kiếm", mSatisticPanel);
+        }
         tplMainBoard.setSelectedComponent(mSatisticPanel);
     }//GEN-LAST:event_tbrSatisticActionPerformed
 
@@ -389,15 +390,13 @@ public class MainForm extends javax.swing.JFrame {
         aboutDialog.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    
     // Quản lý công nhân
     private void tbrQLCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tbrQLCNActionPerformed
         if (mWorkerPanel == null) {
             mWorkerPanel = new WorkerManagementPanel();
 
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
-        }
-        else {
+        } else {
             tplMainBoard.addTab("Quản lý công nhân", mWorkerPanel);
         }
         tplMainBoard.setSelectedComponent(mWorkerPanel);
@@ -409,8 +408,7 @@ public class MainForm extends javax.swing.JFrame {
             mEngineerPanel = new EngineerManagementPanel();
 
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
-        }
-        else {
+        } else {
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
         }
         tplMainBoard.setSelectedComponent(mEngineerPanel);
@@ -421,8 +419,7 @@ public class MainForm extends javax.swing.JFrame {
             mEngineerPanel = new EngineerManagementPanel();
 
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
-        }
-        else {
+        } else {
             tplMainBoard.addTab("Quản lý kỹ sư", mEngineerPanel);
         }
         tplMainBoard.setSelectedComponent(mEngineerPanel);
@@ -432,8 +429,7 @@ public class MainForm extends javax.swing.JFrame {
         if (mEmployeePanel == null) {
             mEmployeePanel = new EmployeeManagementPanel();
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
-        }
-        else {
+        } else {
             tplMainBoard.addTab("Quản lý nhân viên", mEmployeePanel);
         }
         tplMainBoard.setSelectedComponent(mEmployeePanel);
@@ -445,7 +441,7 @@ public class MainForm extends javax.swing.JFrame {
             tplMainBoard.removeAll();
             LoginDialog loginDialog = new LoginDialog(this, true);
             loginDialog.setVisible(true);
-            
+
             processLogin();
         } catch (Exception ex) {
             Logger.getLogger(MainForm.class.getName()).log(Level.SEVERE, null, ex);
@@ -469,6 +465,9 @@ public class MainForm extends javax.swing.JFrame {
             mSatisticPanel = new SatisticManagementPanel();
             tplMainBoard.addTab("Thống kê và tìm kiếm", mSatisticPanel);
         }
+        else {
+            tplMainBoard.addTab("Thống kê và tìm kiếm", mSatisticPanel);
+        }
         tplMainBoard.setSelectedComponent(mSatisticPanel);
     }//GEN-LAST:event_mnuSatisticActionPerformed
 
@@ -482,6 +481,9 @@ public class MainForm extends javax.swing.JFrame {
             mAccountPanel = new AccountManagementPanel();
             tplMainBoard.addTab("Quản lý tài khoản", mAccountPanel);
         }
+        else {
+            tplMainBoard.addTab("Quản lý tài khoản", mAccountPanel);
+        }
         tplMainBoard.setSelectedComponent(mAccountPanel);
     }//GEN-LAST:event_tbrQLTKActionPerformed
 
@@ -492,10 +494,16 @@ public class MainForm extends javax.swing.JFrame {
         if (!SharedData.nguoiDangNhap.getVaiTro().equals("Quản trị viên")) {
             SharedData a = new SharedData();
             a.show_info();
+
+            // Vô hiệu hóa các function nếu không phải là quản trị viên
             mnuManageWorker.setEnabled(false);
             mnuManageEmployee.setEnabled(false);
             mnuManageEngineer.setEnabled(false);
             mnuSatistic.setEnabled(false);
+            mnuQLTK.setEnabled(false);
+
+            tbrSatistic.setEnabled(false);
+            tbrQLTK.setEnabled(false);
             tbrQLNV.setEnabled(false);
             tbrQLKS.setEnabled(false);
             tbrQLCN.setEnabled(false);
@@ -503,30 +511,34 @@ public class MainForm extends javax.swing.JFrame {
                 mNguoiDungPanel = new nguoidungPanel();
                 tplMainBoard.addTab("Thông tin cá nhân", mNguoiDungPanel);
                 tplMainBoard.setSelectedComponent(mNguoiDungPanel);
-            }
-            else {
+            } else {
                 tplMainBoard.addTab("Thông tin cá nhân", mNguoiDungPanel);
                 tplMainBoard.setSelectedComponent(mNguoiDungPanel);
             }
-            
+
         } else {
             if (tplMainBoard == null) {
                 tplMainBoard.setSelectedComponent(mEmployeePanel);
                 tplMainBoard.setSelectedComponent(mEngineerPanel);
                 tplMainBoard.setSelectedComponent(mWorkerPanel);
-            }
+                tplMainBoard.setSelectedComponent(mSatisticPanel);
+                tplMainBoard.setSelectedComponent(mAccountPanel);
+            } 
             SharedData a = new SharedData();
             a.show_info();
             mnuManageWorker.setEnabled(true);
             mnuManageEmployee.setEnabled(true);
             mnuManageEngineer.setEnabled(true);
             mnuSatistic.setEnabled(true);
+            mnuQLTK.setEnabled(true);
+
             tbrQLNV.setEnabled(true);
             tbrQLKS.setEnabled(true);
             tbrQLCN.setEnabled(true);
+            tbrQLTK.setEnabled(true);
+            tbrSatistic.setEnabled(true);
         }
     }
-
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -567,7 +579,6 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem8;
@@ -593,6 +604,7 @@ public class MainForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem mnuManageEmployee;
     private javax.swing.JMenuItem mnuManageEngineer;
     private javax.swing.JMenuItem mnuManageWorker;
+    private javax.swing.JMenuItem mnuQLTK;
     private javax.swing.JMenuItem mnuSatistic;
     private javax.swing.JButton tbrAboutUs;
     private javax.swing.JButton tbrLogout;
