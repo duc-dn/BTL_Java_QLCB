@@ -279,8 +279,8 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
                         .addGap(12, 12, 12)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
+                                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(txtSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -604,16 +604,22 @@ public class WorkerManagementPanel extends javax.swing.JPanel {
         try {
             CongNhanDao dao = new CongNhanDao();
             String info = txtSearch.getText();
-            info = "'%" + info + "%'"; 
-            ArrayList<Congnhan> list = dao.findCongnhan(info);
-            tblModel.setRowCount(0);
-            for (Congnhan it:list) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
-                    it.getDiachi(), it.getBac()
-                });
+            
+            if (info.length() == 0) {
+                MessageDialogHelper.showErrorDialog(parentForm, "Thông tin tìm kiếm không được bỏ trống!!", "Lỗi");
             }
-            tblModel.fireTableDataChanged();
+            else {
+                info = "'%" + info + "%'"; 
+                ArrayList<Congnhan> list = dao.findCongnhan(info);
+                tblModel.setRowCount(0);
+                for (Congnhan it:list) {
+                    tblModel.addRow(new Object[] {
+                        it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+                        it.getDiachi(), it.getBac()
+                    });
+                }
+                tblModel.fireTableDataChanged();
+            }
         }
         catch (Exception e) {
             e.printStackTrace();

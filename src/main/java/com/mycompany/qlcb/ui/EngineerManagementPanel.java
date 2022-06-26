@@ -14,14 +14,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
 public class EngineerManagementPanel extends javax.swing.JPanel {
+
     private MainForm parentForm;
     private DefaultTableModel tblModel;
     ArrayList<Kysu> list;
     String fieldSort = "";
     String sortType = "ASC";
-    
+
     public EngineerManagementPanel() {
         initComponents();
         rdNam.setSelected(true);
@@ -29,33 +29,31 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         initTable();
         loadDataToTable();
     }
-    
+
     private void initTable() {
-       tblModel = new DefaultTableModel();
-       tblModel.setColumnIdentifiers(new String[] {"Mã KS","Họ tên","Năm sinh", "Giới tính", 
-           "Địa chỉ", "Ngành đào tạo", "Loại bằng"});
-       tblEngineer.setModel(tblModel);
+        tblModel = new DefaultTableModel();
+        tblModel.setColumnIdentifiers(new String[]{"Mã KS", "Họ tên", "Năm sinh", "Giới tính",
+            "Địa chỉ", "Ngành đào tạo", "Loại bằng"});
+        tblEngineer.setModel(tblModel);
     }
-    
+
     private void loadDataToTable() {
         try {
             KySuDao dao = new KySuDao();
             list = dao.getAllKysu(null, "");
             tblModel.setRowCount(0);
-            for (Kysu it:list) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+            for (Kysu it : list) {
+                tblModel.addRow(new Object[]{
+                    it.getMacb(), it.getTencb(), it.getNamsinh(), it.getGioitinh(),
                     it.getDiachi(), it.getNganhdt(), it.getLoaibang()
                 });
             }
             tblModel.fireTableDataChanged();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
     }
-
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -335,21 +333,20 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                                                     .addGap(38, 38, 38)
                                                     .addComponent(rdNu))
                                                 .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(20, 20, 20)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(20, 20, 20)
+                                        .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(13, 13, 13)
+                                        .addComponent(btnSort, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel9)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(btnSearch))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(155, 155, 155)
-                                        .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(12, 12, 12)
-                                        .addComponent(btnSort, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(btnSearch)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(408, 408, 408)
@@ -375,12 +372,13 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(btnSearch)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnSearch))
                             .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addGap(13, 13, 13)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -388,12 +386,13 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                         .addComponent(txtNamSinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel3)
                         .addComponent(jLabel6))
-                    .addComponent(btnSort)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSort))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,7 +444,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtAddressActionPerformed
 
     private void txtFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFieldActionPerformed
-        
+
     }//GEN-LAST:event_txtFieldActionPerformed
 
     private void txtDegreeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDegreeActionPerformed
@@ -479,35 +478,31 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
             return;
         }
-        
-        
+
         try {
             // Lấy dữ liệu từ trên form xuống
             Kysu ks = new Kysu();
             ks.setTencb(txtname.getText());
             ks.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
-            ks.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            ks.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
             ks.setLoaibang(txtField.getText());
             ks.setDiachi(txtAddress.getText());
             ks.setNganhdt(txtField.getText());
-            
+
             int manghe = Integer.parseInt(txtMaNghe.getText());
             CanBoDao dao = new CanBoDao();
-            if (dao.insertCB(ks, manghe))
-            {
+            if (dao.insertCB(ks, manghe)) {
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được thêm thành công!!",
-                "Thông báo");
-            }
-            else {
-                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Thông báo");
+            } else {
+                MessageDialogHelper.showConfirmDialog(parentForm,
                         "Kỹ sư không được lưu do lỗi", "Cảnh báo");
             }
-            
+
             // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng nhân viên
-            
             if (dao.getLastIdCB() != -1) {
                 int macb = dao.getLastIdCB();
-                
+
                 // Chèn vào bảng nhân viên
                 dao.insertTable("tbl_kysu", macb, txtField.getText(), txtDegree.getText());
                 //tao tai khoan tu dong
@@ -515,9 +510,9 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
                 System.out.print(tk);
                 Random rand = new Random();
                 String mk = String.valueOf(rand.nextInt(100000000));
-                if(dao.insertTaiKhoan(tk, mk, macb, Integer.valueOf(txtMaNghe.getText()))){
-                    MessageDialogHelper.showMessageDialog(parentForm, "Tạo tài khoản thành công!\nTài khoản: "+tk+"\nMật khẩu: "+mk,
-                "Thông báo");
+                if (dao.insertTaiKhoan(tk, mk, macb, Integer.valueOf(txtMaNghe.getText()))) {
+                    MessageDialogHelper.showMessageDialog(parentForm, "Tạo tài khoản thành công!\nTài khoản: " + tk + "\nMật khẩu: " + mk,
+                            "Thông báo");
                 }
                 loadDataToTable();
             }
@@ -536,22 +531,22 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_txtnameActionPerformed
 
     private void tblEngineerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEngineerMouseClicked
-       try {
+        try {
             // Lấy ra dong được click
             int row = tblEngineer.getSelectedRow();
             if (row >= 0) {
                 txtmaks.setText((String.valueOf(tblModel.getValueAt(row, 0))));
-                txtname.setText((String)tblModel.getValueAt(row, 1));
+                txtname.setText((String) tblModel.getValueAt(row, 1));
                 txtNamSinh.setText(String.valueOf(tblModel.getValueAt(row, 2)));
-                String gender = (String)tblModel.getValueAt(row, 3);
+                String gender = (String) tblModel.getValueAt(row, 3);
                 if (gender.equalsIgnoreCase("Nam")) {
                     rdNam.setSelected(true);
                     rdNu.setSelected(false);
+                } else {
+                    rdNu.setSelected(true);
+                    rdNam.setSelected(false);
                 }
-                else {
-                    rdNu.setSelected(true); rdNam.setSelected(false);
-                }
-                txtAddress.setText((String)tblModel.getValueAt(row, 4));
+                txtAddress.setText((String) tblModel.getValueAt(row, 4));
                 txtField.setText(String.valueOf(tblModel.getValueAt(row, 5)));
                 txtDegree.setText(String.valueOf(tblModel.getValueAt(row, 6)));
             }
@@ -561,19 +556,19 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_tblEngineerMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-       StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         DataValidator.validateEmpty(txtname, sb, "Tên nhân viên không được để trống!!");
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtField, sb, "Trường làm việc không được bỏ trống!!");
-        
+
         // Nếu có lỗi
         if (sb.length() > 0) {
             MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
             return;
         }
-        
-        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?", 
+
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?",
                 "Xác nhận") == JOptionPane.NO_OPTION) {
             return;
         }
@@ -582,29 +577,26 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             Kysu ks = new Kysu();
             ks.setTencb(txtname.getText());
             ks.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
-            ks.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            ks.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
             ks.setNganhdt(txtField.getText());
             ks.setLoaibang(txtDegree.getText());
             ks.setDiachi(txtAddress.getText());
             ks.setMacb(Integer.parseInt(txtmaks.getText()));
             KySuDao dao = new KySuDao();
-            
-            
-            if (dao.update(ks))
-            {
+
+            if (dao.update(ks)) {
                 loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được cập nhật thành công!!",
-                "Thông báo");
-            }
-            else {
-                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Thông báo");
+            } else {
+                MessageDialogHelper.showConfirmDialog(parentForm,
                         "Kỹ sư không được cập nhật do lỗi", "Cảnh báo");
             }
         } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
-       
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -619,8 +611,8 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
             return;
         }
-        
-        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn xóa kỹ sư không?", 
+
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn xóa kỹ sư không?",
                 "Xác nhận") == JOptionPane.NO_OPTION) {
             return;
         }
@@ -628,17 +620,13 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
             // Lấy dữ liệu từ trên form xuống
             CanBoDao dao = new CanBoDao();
             int maks = Integer.parseInt(txtmaks.getText());
-            
-            
-            
-            if (dao.delete("tbl_kysu", "maks",maks))
-            {
+
+            if (dao.delete("tbl_kysu", "maks", maks)) {
                 loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Kỹ sư đã được xóa thành công!!",
-                "Thông báo");
-            }
-            else {
-                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Thông báo");
+            } else {
+                MessageDialogHelper.showConfirmDialog(parentForm,
                         "Kỹ sư không được xóa do lỗi", "Cảnh báo");
             }
         } catch (Exception e) {
@@ -651,31 +639,36 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         try {
             KySuDao dao = new KySuDao();
             String info = txtSearch.getText();
-            info = "'%" + info + "%'"; 
-            ArrayList<Kysu> list = dao.findKysu(info);
-            tblModel.setRowCount(0);
-            for (Kysu it:list) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
-                    it.getDiachi(), it.getNganhdt(), it.getLoaibang()
-                });
+
+            if (info.length() == 0) {
+                MessageDialogHelper.showErrorDialog(parentForm, "Thông tin tìm kiếm không được bỏ trống!!", "Lỗi");
+            } else {
+                info = "'%" + info + "%'";
+                ArrayList<Kysu> list = dao.findKysu(info);
+                tblModel.setRowCount(0);
+                for (Kysu it : list) {
+                    tblModel.addRow(new Object[]{
+                        it.getMacb(), it.getTencb(), it.getNamsinh(), it.getGioitinh(),
+                        it.getDiachi(), it.getNganhdt(), it.getLoaibang()
+                    });
+                }
+                tblModel.fireTableDataChanged();
             }
-            tblModel.fireTableDataChanged();
-        }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void cbFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFieldActionPerformed
-        String txt = (String)cbField.getSelectedItem();
+        String txt = (String) cbField.getSelectedItem();
         fieldSort = txt;
     }//GEN-LAST:event_cbFieldActionPerformed
 
     private void cbSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortActionPerformed
-       String type = (String)cbSort.getSelectedItem();
-       sortType = type;
+        String type = (String) cbSort.getSelectedItem();
+        sortType = type;
     }//GEN-LAST:event_cbSortActionPerformed
 
     private void btnSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortActionPerformed
@@ -684,9 +677,9 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         tblModel.setRowCount(0);
         try {
             listt = dao.sortEngineer(fieldSort, sortType);
-            for (Kysu it:listt) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+            for (Kysu it : listt) {
+                tblModel.addRow(new Object[]{
+                    it.getMacb(), it.getTencb(), it.getNamsinh(), it.getGioitinh(),
                     it.getDiachi(), it.getNganhdt(), it.getLoaibang()
                 });
             }
@@ -695,8 +688,8 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         } catch (Exception ex) {
             Logger.getLogger(EngineerManagementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
- 
-        
+
+
     }//GEN-LAST:event_btnSortActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -706,7 +699,7 @@ public class EngineerManagementPanel extends javax.swing.JPanel {
         CanBoDao dao = new CanBoDao();
         try {
             if (dao.chagePassword(mk, manv)) {
-                MessageDialogHelper.showMessageDialog(parentForm, "Reset mật khẩu thành công!!\nMật khẩu mới: " + mk , "Thông báo");
+                MessageDialogHelper.showMessageDialog(parentForm, "Reset mật khẩu thành công!!\nMật khẩu mới: " + mk, "Thông báo");
             }
 
         } catch (Exception ex) {

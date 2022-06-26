@@ -50,9 +50,9 @@
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="cbRule" min="-2" pref="121" max="-2" attributes="0"/>
-                                          <Component id="cbStatus" min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cbRule" max="32767" attributes="0"/>
+                                          <Component id="cbStatus" pref="144" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -192,11 +192,9 @@
     <Component class="javax.swing.JComboBox" name="cbRule">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Admin"/>
-            <StringItem index="1" value="Nh&#xe2;n Vi&#xea;n"/>
-            <StringItem index="2" value="K&#x1ef9; S&#x1b0;"/>
-            <StringItem index="3" value="C&#xf4;ng nh&#xe2;n"/>
+          <StringArray count="2">
+            <StringItem index="0" value="Qu&#x1ea3;n tr&#x1ecb; vi&#xea;n"/>
+            <StringItem index="1" value="User th&#x1b0;&#x1edd;ng"/>
           </StringArray>
         </Property>
       </Properties>

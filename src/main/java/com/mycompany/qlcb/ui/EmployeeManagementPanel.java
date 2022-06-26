@@ -15,15 +15,14 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import org.apache.poi.ss.formula.functions.Count;
 
-
 public class EmployeeManagementPanel extends javax.swing.JPanel {
-    
+
     private MainForm parentForm;
     private DefaultTableModel tblModel;
     ArrayList<Nhanvien> list;
     String fieldSort = "tencb";
     String sortType = "ASC";
-    
+
     public EmployeeManagementPanel() {
         initComponents();
         rdNam.setSelected(true);
@@ -33,26 +32,25 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     }
 
     private void initTable() {
-       tblModel = new DefaultTableModel();
-       tblModel.setColumnIdentifiers(new String[] {"Mã NV","Họ tên","Năm sinh", "Giới tính", 
-           "Địa chỉ", "Công việc"});
-       tblEmployee.setModel(tblModel);
+        tblModel = new DefaultTableModel();
+        tblModel.setColumnIdentifiers(new String[]{"Mã NV", "Họ tên", "Năm sinh", "Giới tính",
+            "Địa chỉ", "Công việc"});
+        tblEmployee.setModel(tblModel);
     }
-    
+
     private void loadDataToTable() {
         try {
             NhanVienDao dao = new NhanVienDao();
             ArrayList<Nhanvien> list = dao.getAllNhanVien(null, "");
             tblModel.setRowCount(0);
-            for (Nhanvien it:list) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
+            for (Nhanvien it : list) {
+                tblModel.addRow(new Object[]{
+                    it.getMacb(), it.getTencb(), it.getNamsinh(), it.getGioitinh(),
                     it.getDiachi(), it.getCongviec()
                 });
             }
             tblModel.fireTableDataChanged();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
@@ -290,16 +288,16 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel7)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtSearch))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(cbField, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(btnSeach)
                             .addComponent(btnSort, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 55, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
@@ -408,12 +406,16 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
                         .addComponent(txtmanv, 0, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSort))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(cbField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbSort, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnSort)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addComponent(btnExport)
                         .addContainerGap())))
@@ -423,19 +425,19 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
-        
+
     }//GEN-LAST:event_txtNameActionPerformed
 
     private void txtNamSinhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNamSinhActionPerformed
-        
+
     }//GEN-LAST:event_txtNamSinhActionPerformed
 
     private void txtAddressActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAddressActionPerformed
-        
+
     }//GEN-LAST:event_txtAddressActionPerformed
 
     private void txtJobActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtJobActionPerformed
-   
+
     }//GEN-LAST:event_txtJobActionPerformed
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
@@ -446,8 +448,7 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         rdNam.setSelected(true);
         rdNu.setSelected(false);
     }//GEN-LAST:event_btnNewActionPerformed
-    
-    
+
     // Sự kiện save
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         StringBuilder sb = new StringBuilder();
@@ -455,60 +456,53 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
-        
+
         // Nếu có lỗi
         if (sb.length() > 0) {
             MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
             return;
         }
-        
-        
+
         try {
             // Lấy dữ liệu từ trên form xuống
             Nhanvien nv = new Nhanvien();
             nv.setTencb(txtName.getText());
             nv.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
-            nv.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            nv.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
             nv.setCongviec(txtJob.getText());
             nv.setDiachi(txtAddress.getText());
             int manghe = Integer.parseInt(txtMaNghe.getText());
             CanBoDao dao = new CanBoDao();
-            
-            
-            if (dao.insertCB(nv, manghe))
-            {
+
+            if (dao.insertCB(nv, manghe)) {
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được thêm thành công!!",
-                "Thông báo");
-            }
-            else {
-                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Thông báo");
+            } else {
+                MessageDialogHelper.showConfirmDialog(parentForm,
                         "Công nhân không được lưu do lỗi", "Cảnh báo");
             }
-            
-            
+
             // Lấy ra mã cán bộ cuối cùng trong bảng để chèn vào bảng Công nhân
-            
             if (dao.getLastIdCB() != -1) {
                 int macb = dao.getLastIdCB();
-                
+
                 // Chèn vào bảng Công nhân
                 dao.insertTable("tbl_nhanvien", macb, txtJob.getText(), "");
                 SatisticManagementPanel sasPanel = new SatisticManagementPanel();
                 sasPanel.loadDataToTable1();
-                
+
                 //tao tai khoan tu dong
                 String tk = VNCharacterUtils.removeAccent(txtName.getText()).replace(" ", "").toLowerCase();
                 System.out.print(tk);
                 Random rand = new Random();
                 String mk = String.valueOf(rand.nextInt(100000000));
-                if(dao.insertTaiKhoan(tk, mk, macb, Integer.valueOf(txtMaNghe.getText()))){
-                    MessageDialogHelper.showMessageDialog(parentForm, "Tạo tài khoản thành công!\nTài khoản: "+tk+"\nMật khẩu: "+mk,
-                "Thông báo");
+                if (dao.insertTaiKhoan(tk, mk, macb, Integer.valueOf(txtMaNghe.getText()))) {
+                    MessageDialogHelper.showMessageDialog(parentForm, "Tạo tài khoản thành công!\nTài khoản: " + tk + "\nMật khẩu: " + mk,
+                            "Thông báo");
                 }
                 loadDataToTable();
             }
-            
-            
+
         } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
@@ -521,14 +515,14 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
-        
+
         // Nếu có lỗi
         if (sb.length() > 0) {
             MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
             return;
         }
-        
-        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?", 
+
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?",
                 "Xác nhận") == JOptionPane.NO_OPTION) {
             return;
         }
@@ -537,21 +531,18 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             Nhanvien nv = new Nhanvien();
             nv.setTencb(txtName.getText());
             nv.setNamsinh(Integer.parseInt(txtNamSinh.getText()));
-            nv.setGioitinh(rdNam.isSelected()?"Nam":"Nữ");
+            nv.setGioitinh(rdNam.isSelected() ? "Nam" : "Nữ");
             nv.setCongviec(txtJob.getText());
             nv.setDiachi(txtAddress.getText());
             nv.setMacb(Integer.parseInt(txtmanv.getText()));
             NhanVienDao dao = new NhanVienDao();
-            
-            
-            if (dao.update(nv))
-            {
+
+            if (dao.update(nv)) {
                 loadDataToTable();
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được cập nhật thành công!!",
-                "Thông báo");
-            }
-            else {
-                MessageDialogHelper.showConfirmDialog(parentForm, 
+                        "Thông báo");
+            } else {
+                MessageDialogHelper.showConfirmDialog(parentForm,
                         "Công nhân không được cập nhật do lỗi", "Cảnh báo");
             }
         } catch (Exception e) {
@@ -566,18 +557,18 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             int row = tblEmployee.getSelectedRow();
             if (row >= 0) {
                 txtmanv.setText(String.valueOf(tblModel.getValueAt(row, 0)));
-                txtName.setText((String)tblModel.getValueAt(row, 1));
+                txtName.setText((String) tblModel.getValueAt(row, 1));
                 txtNamSinh.setText(String.valueOf(tblModel.getValueAt(row, 2)));
-                String gender = (String)tblModel.getValueAt(row, 3);
+                String gender = (String) tblModel.getValueAt(row, 3);
                 if (gender.equalsIgnoreCase("Nam")) {
                     rdNam.setSelected(true);
                     rdNu.setSelected(false);
+                } else {
+                    rdNu.setSelected(true);
+                    rdNam.setSelected(false);
                 }
-                else {
-                    rdNu.setSelected(true); rdNam.setSelected(false);
-                }
-                txtAddress.setText((String)tblModel.getValueAt(row, 4));
-                txtJob.setText((String)tblModel.getValueAt(row, 5));
+                txtAddress.setText((String) tblModel.getValueAt(row, 4));
+                txtJob.setText((String) tblModel.getValueAt(row, 5));
             }
         } catch (Exception e) {
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
@@ -590,14 +581,14 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         DataValidator.validateEmpty(txtNamSinh, sb, "Năm sinh không được bỏ trống!!");
         DataValidator.validateEmpty(txtAddress, sb, "Địa chỉ không được bỏ trống!");
         DataValidator.validateEmpty(txtJob, sb, "Công việc không được bỏ trống!!");
-        
+
         // Nếu có lỗi
         if (sb.length() > 0) {
             MessageDialogHelper.showErrorDialog(parentForm, sb.toString(), "Lỗi");
             return;
         }
-        
-        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?", 
+
+        if (MessageDialogHelper.showConfirmDialog(parentForm, "Bạn có muốn cập nhật sinh viên không?",
                 "Xác nhận") == JOptionPane.NO_OPTION) {
             return;
         }
@@ -605,17 +596,13 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
             // Lấy dữ liệu từ trên form xuống
             CanBoDao dao = new CanBoDao();
             int manv = Integer.parseInt(txtmanv.getText());
-            
-            
-            
-            if (dao.delete("tbl_nhanvien", "manv",manv))
-            {
+
+            if (dao.delete("tbl_nhanvien", "manv", manv)) {
                 MessageDialogHelper.showMessageDialog(parentForm, "Công nhân đã được xóa thành công!!",
-                "Thông báo");
+                        "Thông báo");
                 loadDataToTable();
-            }
-            else {
-                MessageDialogHelper.showConfirmDialog(parentForm, 
+            } else {
+                MessageDialogHelper.showConfirmDialog(parentForm,
                         "Công nhân không được xóa do lỗi", "Cảnh báo");
             }
         } catch (Exception e) {
@@ -628,30 +615,33 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         try {
             NhanVienDao dao = new NhanVienDao();
             String info = txtSearch.getText();
-            info = "'%" + info + "%'"; 
-            ArrayList<Nhanvien> list = dao.findNhanVien(info);
-            tblModel.setRowCount(0);
-            for (Nhanvien it:list) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(), 
-                    it.getDiachi(), it.getCongviec()
-                });
+            if (info.length() == 0) {
+                MessageDialogHelper.showErrorDialog(parentForm, "Thông tin tìm kiếm không được bỏ trống!!", "Lỗi");
+            } else {
+                info = "'%" + info + "%'";
+                ArrayList<Nhanvien> list = dao.findNhanVien(info);
+                tblModel.setRowCount(0);
+                for (Nhanvien it : list) {
+                    tblModel.addRow(new Object[]{
+                        it.getMacb(), it.getTencb(), it.getNamsinh(), it.getGioitinh(),
+                        it.getDiachi(), it.getCongviec()
+                    });
+                }
+                tblModel.fireTableDataChanged();
             }
-            tblModel.fireTableDataChanged();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             MessageDialogHelper.showErrorDialog(parentForm, e.getMessage(), "Lỗi");
         }
     }//GEN-LAST:event_btnSeachActionPerformed
 
     private void cbFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFieldActionPerformed
-        String txt = (String)cbField.getSelectedItem();
+        String txt = (String) cbField.getSelectedItem();
         fieldSort = txt;
     }//GEN-LAST:event_cbFieldActionPerformed
 
     private void cbSortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSortActionPerformed
-        String type = (String)cbSort.getSelectedItem();
+        String type = (String) cbSort.getSelectedItem();
         sortType = type;
     }//GEN-LAST:event_cbSortActionPerformed
 
@@ -661,15 +651,15 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         tblModel.setRowCount(0);
         try {
             listt = dao.sortEmployee(fieldSort, sortType);
-            for (Nhanvien it:listt) {
-                tblModel.addRow(new Object[] {
-                    it.getMacb(),it.getTencb(), it.getNamsinh(), it.getGioitinh(),
+            for (Nhanvien it : listt) {
+                tblModel.addRow(new Object[]{
+                    it.getMacb(), it.getTencb(), it.getNamsinh(), it.getGioitinh(),
                     it.getDiachi(), it.getCongviec()
                 });
             }
             tblModel.fireTableDataChanged();
             tblEmployee.setModel(tblModel);
-            
+
         } catch (Exception ex) {
             Logger.getLogger(EngineerManagementPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -683,11 +673,11 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         try {
             System.out.println("alo dmm1");
             if (dao.chagePassword(mk, manv)) {
-                
+
                 System.out.println("alo dmm2");
-                MessageDialogHelper.showMessageDialog(parentForm, "Reset mật khẩu thành công!!\nMật khẩu mới: " + mk , "Thông báo");
+                MessageDialogHelper.showMessageDialog(parentForm, "Reset mật khẩu thành công!!\nMật khẩu mới: " + mk, "Thông báo");
             }
-            
+
         } catch (Exception ex) {
             MessageDialogHelper.showErrorDialog(parentForm, ex.getMessage(), "Lỗi");
         }
@@ -697,14 +687,14 @@ public class EmployeeManagementPanel extends javax.swing.JPanel {
         try {
             NhanVienDao dao = new NhanVienDao();
             ArrayList<Nhanvien> list = dao.getAllNhanVien(null, "");
-            
+
             if (list.size() > 0) {
                 ExportBase export = new ExportBase();
                 export.NhanVienExport(list);
-                
+
                 MessageDialogHelper.showMessageDialog(parentForm, "Xuất file thành công", "Thông báo");
             }
-            
+
         } catch (Exception ex) {
             MessageDialogHelper.showErrorDialog(parentForm, ex.getMessage(), "Lỗi");
         }

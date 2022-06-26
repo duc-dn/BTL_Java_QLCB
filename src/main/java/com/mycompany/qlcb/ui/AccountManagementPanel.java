@@ -32,7 +32,7 @@ public class AccountManagementPanel extends javax.swing.JPanel {
 
     private void initTable() {
        tblModel = new DefaultTableModel();
-       tblModel.setColumnIdentifiers(new String[] {"Mã CB","Tên đăng nhập","Chức vụ", "Trạng thái"});
+       tblModel.setColumnIdentifiers(new String[] {"Mã CB","Tên đăng nhập","Quyền", "Trạng thái"});
        tbAccount.setModel(tblModel);
     }
     
@@ -45,9 +45,8 @@ public class AccountManagementPanel extends javax.swing.JPanel {
             for (TaiKhoan it:list) {
                 String cv = null;
                 if (it.getQuyen() == 0) cv = "Quản trị viên";
-                else if (it.getQuyen() == 1) cv = "Công nhân";
-                else if (it.getQuyen() == 2) cv = "Kỹ sư";
-                else if (it.getQuyen() == 3) cv = "Nhân viên";
+                else if (it.getQuyen() == 1) cv = "User thường";
+                
                 tblModel.addRow(new Object[] {
                     it.getMacb(),it.getUsername(), cv, it.getTrangthai()
                 });
@@ -130,7 +129,7 @@ public class AccountManagementPanel extends javax.swing.JPanel {
             }
         });
 
-        cbRule.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "Nhân Viên", "Kỹ Sư", "Công nhân" }));
+        cbRule.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Quản trị viên", "User thường" }));
         cbRule.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbRuleActionPerformed(evt);
@@ -177,9 +176,9 @@ public class AccountManagementPanel extends javax.swing.JPanel {
                                         .addComponent(tblReload, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(cbRule, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(cbStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(cbRule, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(cbStatus, 0, 144, Short.MAX_VALUE))))))
                         .addContainerGap())))
         );
         layout.setVerticalGroup(
@@ -228,21 +227,18 @@ public class AccountManagementPanel extends javax.swing.JPanel {
                 if ((String)tbAccount.getValueAt(row, 2) == "Quản trị viên") {
                     cbRule.setSelectedIndex(0);
                 }
-                else if ((String)tbAccount.getValueAt(row, 2) == "Công nhân") {
-                    cbRule.setSelectedIndex(3);
-                }
-                else if ((String)tbAccount.getValueAt(row, 2) == "Nhân viên") {
+                else if ((String)tbAccount.getValueAt(row, 2) == "User thường") {
                     cbRule.setSelectedIndex(1);
                 }
-                else if ((String)tbAccount.getValueAt(row, 2) == "Kỹ sư") {
-                    cbRule.setSelectedIndex(2);
-                }
+                
                 
                 if ((String)tbAccount.getValueAt(row, 3) == "Đang hoạt động") {
+                    System.out.println("alo 1");
                     cbStatus.setSelectedIndex(0);
                 }
                 else if ((String)tbAccount.getValueAt(row, 3) == "Vô hiệu hóa")
                 {
+                    System.out.println("alo2");
                     cbStatus.setSelectedIndex(1);
                 }
             }
@@ -272,9 +268,8 @@ public class AccountManagementPanel extends javax.swing.JPanel {
             tk.setMacb(Integer.parseInt(txtId.getText()));
             int quyen = 0;
             if (rule.equalsIgnoreCase("Admin")) quyen = 0;
-            else if (rule.equalsIgnoreCase("Công nhân")) quyen = 1;
-            else if (rule.equalsIgnoreCase("Kỹ sư")) quyen = 2;
-            else if (rule.equalsIgnoreCase("Nhân viên")) quyen = 3;
+            else if (rule.equalsIgnoreCase("User thường")) quyen = 1;
+           
             
 
             tk.setTrangthai(status);
