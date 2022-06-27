@@ -157,8 +157,7 @@ public class LoginDialog extends javax.swing.JDialog {
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         StringBuilder sb = new StringBuilder();
         DataValidator.validateEmpty(txtUsername, sb, "Tên đăng nhập không được để trống!!");
-        DataValidator.validateEmpty(txtPassword, sb, "Mật khẩu không được để trống!!");
-        
+        DataValidator.validateEmpty(txtPassword, sb, "Mật khẩu không được để trống!! " );
         if (sb.length() > 0) {
             MessageDialogHelper.showErrorDialog(this, sb.toString(), "Lỗi");
             return;
@@ -167,11 +166,17 @@ public class LoginDialog extends javax.swing.JDialog {
         NguoiDungDao dao = new NguoiDungDao();
         try {
             nd = dao.checkLogin(txtUsername.getText(), new String(txtPassword.getPassword()));
-            
+            System.out.println(nd.getTenDangNhap());            
+            System.out.println(nd.getMatKhau()); 
+            System.out.println(nd.getVaiTro());
+
+
             if (nd==null) {
                 MessageDialogHelper.showErrorDialog(this, "Tên đăng nhập hoặc mật khẩu sai!!", "Lỗi");
             }
-            else {
+            else if(nd.getTenDangNhap() == ""){
+                MessageDialogHelper.showErrorDialog(this, "Người dùng đã bị vô hiệu hóa\nVui lòng đăng nhập bằng tài khoản khác!", "Lỗi");
+            }else{
                 SharedData.nguoiDangNhap = nd;
                 // dong hop thoai
                 this.dispose();

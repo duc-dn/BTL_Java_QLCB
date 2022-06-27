@@ -6,6 +6,9 @@ public class NguoiDung {
     private int macb;
 
     public NguoiDung() {
+        tenDangNhap = "";
+        matKhau = "";
+        vaiTro = "";
     }
 
     public NguoiDung(String tenDangNhap, String matKhau,int macb, String vaiTro) {
